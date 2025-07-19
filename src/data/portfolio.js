@@ -75,7 +75,7 @@ export const experience = [
   {
     id: 2,
     company: "Zemoso Technologies",
-    position: "Software Engineer Intern",
+    position: "Software Engineer 1",
     duration: "Nov 2021 - Aug 2023",
     location: "Hyderabad, India",
     type: "Fulltime",
