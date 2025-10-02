@@ -140,13 +140,13 @@ export const projects = [
       "A LaTeX-first résumé tailoring tool that works directly with your .tex source to produce ATS-friendly, tailored résumés. Choose AI models to control length, tone and style; edit the generated LaTeX inline with a live side-by-side PDF preview, then export the final PDF or .tex file.",
     image: "/projects/latex-resume.jpg",
     technologies: [
+      "Vector DB",
+      "RAG",
+      "OpenAI / LLMs",
       "React",
       "Node.js",
       "LaTeX",
       "PDF.js",
-      "Vector DB",
-      "RAG",
-      "OpenAI / LLMs",
       "Docker",
     ],
     features: [
