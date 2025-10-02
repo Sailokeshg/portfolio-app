@@ -57,7 +57,7 @@ export const experience = [
       "Engineered scalable backend services using Python & Node.js and integrated them with React frontends, implementing reusable components and microservices that accelerated development timelines by 15%",
       "Implemented comprehensive testing (Jest, Pytest) achieving 90% coverage, enhancing system reliability and reducing production bug reports by 20%",
       "Collaborated within cross-functional teams, ensuring timely completion of bootcamps and successful project delivery, achieving a 100% on-time delivery rate across all assigned projects",
-      "Architected and automated ETL pipelines (Python, SQL) extracting data from POS systems into cloud databases (PostgreSQL), improving data processing efficiency by 20%"
+      "Architected and automated ETL pipelines (Python, SQL) extracting data from POS systems into cloud databases (PostgreSQL), improving data processing efficiency by 20%",
     ],
     technologies: [
       "React",
@@ -69,7 +69,7 @@ export const experience = [
       "SQL",
       "ETL",
       "Microservices",
-      "Real-time Analytics"
+      "Real-time Analytics",
     ],
   },
   {
@@ -86,7 +86,7 @@ export const experience = [
       "Mentored 3 junior developers on React & backend best practices and conducted rigorous peer code reviews, resulting in a 15% increase in code quality metrics and faster onboarding",
       "Integrated Amazon S3 and QuickBooks APIs into a modular event-driven architecture, enabling seamless data flow that enhanced product functionality and increased user satisfaction by 20%",
       "Designed and implemented CI/CD pipelines with automated testing and Docker, reducing development cycles by 40% and enabling 25% more frequent deployments",
-      "Deployed and managed application components on AWS (EC2, S3) using Docker & Kubernetes (EKS), implementing auto-scaling to handle 30% traffic spikes and reducing cloud costs by 15%"
+      "Deployed and managed application components on AWS (EC2, S3) using Docker & Kubernetes (EKS), implementing auto-scaling to handle 30% traffic spikes and reducing cloud costs by 15%",
     ],
     technologies: [
       "React",
@@ -99,7 +99,7 @@ export const experience = [
       "AWS EC2",
       "AWS EKS",
       "CI/CD",
-      "Automated Testing"
+      "Automated Testing",
     ],
   },
 ];
@@ -130,6 +130,35 @@ export const projects = [
     githubUrl: "https://github.com/Sailokeshg/csueb-gemini-api",
     liveUrl: "https://csueb-support.netlify.app",
     status: "Being Improved",
+  },
+  {
+    id: 2,
+    title: "LaTeX Résumé Tailor",
+    description:
+      "Upload your LaTeX .tex résumé and get a tailored, keyword-optimized version with a live PDF preview in under 2 minutes.",
+    longDescription:
+      "A LaTeX-first résumé tailoring tool that works directly with your .tex source to produce ATS-friendly, tailored résumés. Choose AI models to control length, tone and style; edit the generated LaTeX inline with a live side-by-side PDF preview, then export the final PDF or .tex file.",
+    image: "/projects/latex-resume.jpg",
+    technologies: [
+      "React",
+      "Node.js",
+      "LaTeX",
+      "PDF.js",
+      "Vector DB",
+      "RAG",
+      "OpenAI / LLMs",
+      "Docker",
+    ],
+    features: [
+      "LaTeX-first workflow: work directly with .tex source",
+      "Model selection palette to control length, tone and style",
+      "Live code + PDF preview side-by-side for instant feedback",
+      "One-click tailoring: keyword-optimized .tex and updated PDF in ~2 minutes",
+      "Inline editing of generated LaTeX and easy final export",
+    ],
+    githubUrl: "https://github.com/Sailokeshg/resume-tailor-ai",
+    liveUrl: "",
+    status: "Personal Project",
   },
 ];
 
@@ -211,5 +240,5 @@ export const socialLinks = [
     name: "Email",
     url: "mailto:sailokeshreddy@gmail.com",
     icon: "mail",
-  }
+  },
 ];
