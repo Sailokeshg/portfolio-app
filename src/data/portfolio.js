@@ -43,11 +43,34 @@ export const education = [
 ];
 
 export const experience = [
-  {
+    {
     id: 1,
+    company: "Subscrbe AI",
+    position: "Founding AI Engineer",
+    duration: "Aug 2025 - Present",
+    location: "San Francisco, CA",
+    type: "Full-time",
+    description:
+      "Leading AI integration and full-stack development of an application build using flutter for IOS and Android.",
+    achievements: [
+      "Spearheaded core architectural decisions and developed mission-critical features from inception, shaping product direction and technical standards as a founding engineer, enabling the platform to scale efficiently to thousands of daily active users in a high-growth startup environment",
+     "Led the migration from deprecated Firebase Dynamic Links to native Universal Links (iOS) and App Links (Android) using a custom domain, improving deep link reliability by up to 50%, reducing link failures, and enhancing cross-platform user engagement and retention.",
+     "Led intergration of AI features across the application, including RAG and agentic AI architectural decisions that enhanced the system reliability by 60%"
+    ],
+    technologies: [
+      "Agentic AI",
+      "Azure AI",
+      "Flutter",
+      "Firestore",
+      "IOS Development",
+      "ML Pipelines"
+    ],
+  },
+  {
+    id: 2,
     company: "WashMetrix",
     position: "Software Engineer",
-    duration: "May 2024 - Present",
+    duration: "May 2024 - Jul 2025",
     location: "San Francisco, CA",
     type: "Full-time",
     description:
@@ -73,12 +96,12 @@ export const experience = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     company: "Zemoso Technologies",
     position: "Software Engineer 1",
     duration: "Nov 2021 - Aug 2023",
     location: "Hyderabad, India",
-    type: "Fulltime",
+    type: "Full-time",
     description:
       "Engineered scalable full-stack applications and cloud infrastructure solutions, focusing on performance optimization and team development.",
     achievements: [
