@@ -1,13 +1,13 @@
 export const personalInfo = {
   name: "Sai Lokesh Reddy",
-  title: "Software Engineer",
+  title: "Software Engineer AI",
   email: "sailokeshreddy@gmail.com",
   phone: "+1 (510) 255-0650",
   linkedin: "https://linkedin.com/in/sailokeshg",
   github: "https://github.com/sailokeshg",
-  location: "San Francisco Bay Area, CA",
+  location: "New Jersey, NJ",
   summary:
-    "Experienced Software Engineer with expertise in full-stack development, cloud technologies, and AI integration. Proven track record of building scalable applications and leading technical initiatives across diverse industries.",
+    "Experienced Software Engineer with expertise in AI based full-stack development, cloud technologies, and AI integration. Proven track record of building scalable applications and leading technical initiatives across diverse industries.",
   resumeUrl: "/Sai_Lokesh_Reddy.pdf",
 };
 
@@ -43,11 +43,36 @@ export const education = [
 ];
 
 export const experience = [
-    {
+      {
     id: 1,
+    company: "Agadia Systems",
+    position: "Software Engineer AI",
+    duration: "Jan 2026 - Present",
+    location: "New Jersey, NJ",
+    type: "Full-time",
+    description:
+      "Leading AI integration to improve enterprise level software development lifecycle using RAG Chatbots and AI Agents.",
+    achievements: [
+      "Led the end-to-end architecture and delivery of an enterprise RAG-based AI chatbot (Angular, FastAPI, Azure) over 40,000+ technical documents, reducing engineering knowledge lookup time by 60% through advanced LLM-powered semantic search.",
+     "Architected scalable LLM workflows using PostgreSQL + pgvector for vector similarity search with hybrid retrieval and strict metadata filtering (document/version/section-level constraints), improving retrieval precision by 35% and ensuring 100% citation-backed responses.",
+     "Designed a high-performance ingestion and embedding pipeline for 100–400 page technical manuals (including code blocks and architecture diagrams), reducing hallucinations by 50% and achieving 90%+ answer accuracy on internal benchmarks.",
+     "Optimized Azure-hosted inference, indexing, and caching strategies to cut end-to-end response latency by 45%, supporting high-concurrency enterprise usage with production-grade monitoring and evaluation metrics."
+    ],
+    technologies: [
+      "RAG",
+      "Agentic AI",
+      "Azure AI",
+      "FastAPI",
+      "Angular",
+      "Vector DB",
+      "ML Pipelines"
+    ],
+  },
+    {
+    id: 2,
     company: "Subscrbe AI",
     position: "Founding AI Engineer",
-    duration: "Aug 2025 - Present",
+    duration: "Aug 2025 - Jan 2026",
     location: "San Francisco, CA",
     type: "Full-time",
     description:
@@ -67,7 +92,7 @@ export const experience = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     company: "WashMetrix",
     position: "Software Engineer",
     duration: "May 2024 - Jul 2025",
@@ -96,7 +121,7 @@ export const experience = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     company: "Zemoso Technologies",
     position: "Software Engineer 1",
     duration: "Nov 2021 - Aug 2023",
@@ -206,6 +231,7 @@ export const skills = {
   ],
   database: [
     { name: "PostgreSQL", level: 85, category: "Database" },
+     { name: "Pinecone", level: 85, category: "Database" },
     { name: "MongoDB", level: 80, category: "Database" },
     { name: "MySQL", level: 85, category: "Database" },
     { name: "Redis", level: 75, category: "Database" },
