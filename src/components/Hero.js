@@ -1,192 +1,275 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ChevronDown, Download, ExternalLink } from "lucide-react";
+import {
+  ArrowRight,
+  Bot,
+  BrainCircuit,
+  Database,
+  Download,
+  Mail,
+  Network,
+  ShieldCheck,
+  Sparkles,
+  Zap,
+} from "lucide-react";
 import { personalInfo } from "../data/portfolio";
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 24, filter: "blur(8px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.65, ease: "easeOut" },
+  },
+};
+
+const stagger = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.11,
+      delayChildren: 0.18,
+    },
+  },
+};
+
+const capabilityChips = ["RAG", "Agentic AI", "Azure AI", "FastAPI", "React", "pgvector"];
+
+const metrics = [
+  { value: "40K+", label: "technical docs indexed" },
+  { value: "60%", label: "faster knowledge lookup" },
+  { value: "45%", label: "lower response latency" },
+];
+
+const handleScroll = (sectionId) => {
+  const element = document.querySelector(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+};
+
+const SystemCockpit = () => (
+  <motion.div
+    initial={{ opacity: 0, x: 28, scale: 0.98 }}
+    animate={{ opacity: 1, x: 0, scale: 1 }}
+    transition={{ duration: 0.8, delay: 0.35, ease: "easeOut" }}
+    className="panel-border relative min-h-[520px] p-4 sm:p-5"
+  >
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_18%,rgba(55,243,255,0.16),transparent_28%),radial-gradient(circle_at_78%_28%,rgba(183,255,90,0.12),transparent_26%)]" />
+    <div className="relative grid h-full gap-4">
+      <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-ink-950/90 p-4 text-white shadow-glow">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary-200">
+            AI Systems Cockpit
+          </p>
+          <h3 className="mt-2 text-xl font-black tracking-tight">
+            Enterprise RAG runtime
+          </h3>
+        </div>
+        <div className="grid h-12 w-12 place-items-center rounded-2xl border border-primary-300/25 bg-primary-300/10">
+          <BrainCircuit className="h-6 w-6 text-primary-200" />
+        </div>
+      </div>
+
+      <div className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="rounded-2xl border border-ink-900/10 bg-white/[0.82] p-4 dark:border-white/10 dark:bg-white/[0.075]">
+          <div className="mb-4 flex items-center gap-2">
+            <span className="h-3 w-3 rounded-full bg-signal-rose" />
+            <span className="h-3 w-3 rounded-full bg-signal-amber" />
+            <span className="h-3 w-3 rounded-full bg-signal-green" />
+            <span className="ml-auto text-xs font-semibold text-ink-500 dark:text-ink-400">
+              retrieval.py
+            </span>
+          </div>
+          <div className="space-y-2 font-mono text-xs leading-6 text-ink-700 dark:text-ink-200">
+            <p>
+              <span className="text-primary-600 dark:text-primary-300">query</span>
+              {" = embed(user_question)"}
+            </p>
+            <p>
+              <span className="text-signal-violet">matches</span>
+              {" = hybrid_search(pgvector)"}
+            </p>
+            <p>
+              <span className="text-signal-green">context</span>
+              {" = rerank(matches, metadata)"}
+            </p>
+            <p>
+              <span className="text-signal-amber">answer</span>
+              {" = cite(llm(context))"}
+            </p>
+          </div>
+        </div>
+
+        <div className="grid gap-4">
+          <div className="rounded-2xl border border-ink-900/10 bg-white/[0.82] p-4 dark:border-white/10 dark:bg-white/[0.075]">
+            <div className="flex items-center gap-3">
+              <Database className="h-5 w-5 text-primary-600 dark:text-primary-300" />
+              <div>
+                <p className="text-sm font-bold">Vector index</p>
+                <p className="text-xs text-ink-500 dark:text-ink-400">
+                  40,000+ docs with citations
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 grid grid-cols-6 gap-1.5">
+              {Array.from({ length: 24 }).map((_, index) => (
+                <motion.span
+                  key={index}
+                  initial={{ opacity: 0.25 }}
+                  animate={{ opacity: [0.25, 1, 0.35] }}
+                  transition={{
+                    duration: 2.4,
+                    repeat: Infinity,
+                    delay: index * 0.04,
+                  }}
+                  className="h-2 rounded-full bg-primary-400/70"
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-ink-900/10 bg-ink-950 p-4 text-white dark:border-white/10">
+            <div className="flex items-center gap-3">
+              <Bot className="h-5 w-5 text-signal-green" />
+              <p className="text-sm font-bold">Citation-backed response</p>
+            </div>
+            <div className="mt-4 rounded-xl bg-white/[0.07] p-3 text-xs leading-6 text-ink-200">
+              Answer generated from section-level evidence with version filters
+              and strict source grounding.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-3">
+        {[
+          { icon: Network, label: "Hybrid retrieval", value: "35% precision lift" },
+          { icon: Zap, label: "Cached inference", value: "45% faster" },
+          { icon: ShieldCheck, label: "Grounded answers", value: "90%+ accuracy" },
+        ].map((item) => (
+          <div
+            key={item.label}
+            className="rounded-2xl border border-ink-900/10 bg-white/75 p-4 dark:border-white/10 dark:bg-white/[0.06]"
+          >
+            <item.icon className="h-5 w-5 text-primary-600 dark:text-primary-300" />
+            <p className="mt-4 text-xs font-semibold uppercase tracking-[0.18em] text-ink-500 dark:text-ink-400">
+              {item.label}
+            </p>
+            <p className="mt-1 text-lg font-black tracking-tight">{item.value}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <motion.div
+      className="pointer-events-none absolute inset-x-5 top-0 h-20 bg-gradient-to-b from-primary-300/[0.18] to-transparent"
+      animate={{ y: [0, 360, 0], opacity: [0, 0.7, 0] }}
+      transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+    />
+  </motion.div>
+);
+
 const Hero = () => {
-  const handleScroll = (sectionId) => {
-    const element = document.querySelector(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  };
-
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="relative flex min-h-screen items-center overflow-hidden px-4 pb-20 pt-32 sm:px-6 lg:px-8 lg:pt-36"
     >
-      {/* Background Elements */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary-200 dark:bg-primary-900 rounded-full mix-blend-multiply dark:mix-blend-lighten filter blur-xl opacity-70 animate-pulse-slow"></div>
-        <div
-          className="absolute top-1/3 right-1/4 w-72 h-72 bg-purple-200 dark:bg-purple-900 rounded-full mix-blend-multiply dark:mix-blend-lighten filter blur-xl opacity-70 animate-pulse-slow"
-          style={{ animationDelay: "2s" }}
-        ></div>
-        <div
-          className="absolute bottom-1/4 left-1/3 w-72 h-72 bg-pink-200 dark:bg-pink-900 rounded-full mix-blend-multiply dark:mix-blend-lighten filter blur-xl opacity-70 animate-pulse-slow"
-          style={{ animationDelay: "4s" }}
-        ></div>
-      </div>
-
-      <div className="container-center section-padding">
+      <div className="container-center">
         <motion.div
-          variants={containerVariants}
+          variants={stagger}
           initial="hidden"
           animate="visible"
-          className="text-center space-y-6"
+          className="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr]"
         >
-          {/* Greeting */}
-          <motion.div variants={itemVariants}>
-            <span className="text-primary-600 dark:text-primary-400 font-medium text-lg">
-              Hello, I'm
-            </span>
-          </motion.div>
+          <div>
+            <motion.div variants={fadeUp} className="pill">
+              <Sparkles className="h-3.5 w-3.5 text-primary-600 dark:text-primary-300" />
+              Software Engineer AI
+            </motion.div>
 
-          {/* Name */}
-          <motion.h1
-            variants={itemVariants}
-            className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold"
-          >
-            <span className="gradient-text">{personalInfo.name}</span>
-          </motion.h1>
-
-          {/* Title */}
-          <motion.h2
-            variants={itemVariants}
-            className="text-2xl sm:text-3xl lg:text-4xl font-light text-gray-600 dark:text-gray-300"
-          >
-            {personalInfo.title}
-          </motion.h2>
-
-          {/* Summary */}
-          <motion.p
-            variants={itemVariants}
-            className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed"
-          >
-            {personalInfo.summary}
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8"
-          >
-            <motion.button
-              onClick={() => handleScroll("#projects")}
-              className="btn-primary inline-flex items-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <motion.h1
+              variants={fadeUp}
+              className="mt-7 max-w-5xl text-balance text-5xl font-black tracking-tight text-ink-950 dark:text-white sm:text-6xl lg:text-7xl"
             >
-              <span>View My Work</span>
-              <ExternalLink size={16} />
-            </motion.button>
+              Building AI systems that turn complex knowledge into usable
+              software.
+            </motion.h1>
 
-            <motion.a
-              href={personalInfo.resumeUrl}
-              download
-              className="btn-secondary inline-flex items-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <motion.p
+              variants={fadeUp}
+              className="mt-6 max-w-2xl text-lg leading-8 text-ink-600 dark:text-ink-300"
             >
-              <Download size={16} />
-              <span>Download Resume</span>
-            </motion.a>
-          </motion.div>
+              I design RAG platforms, agentic workflows, cloud-native backends,
+              and polished full-stack products that make enterprise knowledge
+              faster to find, trust, and use.
+            </motion.p>
 
-          {/* Social Links */}
-          <motion.div
-            variants={itemVariants}
-            className="flex items-center justify-center gap-6 pt-8"
-          >
-            <motion.a
-              href={personalInfo.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-              whileHover={{ scale: 1.2, y: -2 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-              </svg>
-            </motion.a>
+            <motion.div variants={fadeUp} className="mt-7 flex flex-wrap gap-2">
+              {capabilityChips.map((chip) => (
+                <span key={chip} className="pill">
+                  {chip}
+                </span>
+              ))}
+            </motion.div>
 
-            <motion.a
-              href={personalInfo.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-              whileHover={{ scale: 1.2, y: -2 }}
-              whileTap={{ scale: 0.9 }}
+            <motion.div
+              variants={fadeUp}
+              className="mt-9 flex flex-col gap-3 sm:flex-row"
             >
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-              </svg>
-            </motion.a>
-
-            <motion.a
-              href={`mailto:${personalInfo.email}`}
-              className="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-              whileHover={{ scale: 1.2, y: -2 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+              <motion.button
+                onClick={() => handleScroll("#projects")}
+                className="btn-primary inline-flex items-center justify-center gap-2"
+                whileHover={{ y: -2 }}
+                whileTap={{ y: 0 }}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 8l7.89 7.89a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
-            </motion.a>
-          </motion.div>
-        </motion.div>
+                View Projects
+                <ArrowRight size={17} />
+              </motion.button>
+              <motion.a
+                href={personalInfo.resumeUrl}
+                download
+                className="btn-secondary inline-flex items-center justify-center gap-2"
+                whileHover={{ y: -2 }}
+                whileTap={{ y: 0 }}
+              >
+                <Download size={17} />
+                Download Resume
+              </motion.a>
+              <motion.button
+                onClick={() => handleScroll("#contact")}
+                className="btn-secondary inline-flex items-center justify-center gap-2"
+                whileHover={{ y: -2 }}
+                whileTap={{ y: 0 }}
+              >
+                <Mail size={17} />
+                Contact Me
+              </motion.button>
+            </motion.div>
 
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.5, duration: 0.6 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <motion.button
-            onClick={() => handleScroll("#about")}
-            className="flex flex-col items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-          >
-            <span className="text-sm font-medium">Scroll Down</span>
-            <ChevronDown size={20} />
-          </motion.button>
+            <motion.div
+              variants={fadeUp}
+              className="mt-10 grid gap-3 sm:grid-cols-3"
+            >
+              {metrics.map((metric) => (
+                <div
+                  key={metric.label}
+                  className="rounded-2xl border border-ink-900/10 bg-white/60 p-4 backdrop-blur dark:border-white/10 dark:bg-white/[0.045]"
+                >
+                  <p className="text-3xl font-black tracking-tight text-ink-950 dark:text-white">
+                    {metric.value}
+                  </p>
+                  <p className="mt-1 text-sm leading-5 text-ink-500 dark:text-ink-400">
+                    {metric.label}
+                  </p>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          <SystemCockpit />
         </motion.div>
       </div>
     </section>

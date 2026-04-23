@@ -1,214 +1,165 @@
-import React from "react";
-import { motion } from "framer-motion";
-import {
-  Building,
-  MapPin,
-  Calendar,
-  ExternalLink,
-  CheckCircle,
-} from "lucide-react";
+import React, { useRef } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { Building2, Calendar, CheckCircle2, MapPin, TrendingUp } from "lucide-react";
 import { experience } from "../data/portfolio";
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.14, delayChildren: 0.12 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 26, filter: "blur(8px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.62, ease: "easeOut" },
+  },
+};
+
+const metricFromAchievement = (achievement) => {
+  const match = achievement.match(/(\d+(?:,\d+)?\+?%?|\d+K\+?)/);
+  return match ? match[0] : null;
+};
+
 const Experience = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const timelineVariants = {
-    hidden: { scaleY: 0 },
-    visible: {
-      scaleY: 1,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-      },
-    },
-  };
+  const timelineRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 70%", "end 35%"],
+  });
+  const scaleY = useSpring(scrollYProgress, { stiffness: 120, damping: 28 });
 
   return (
-    <section id="experience" className="section-padding">
+    <section id="experience" className="section-padding relative">
       <div className="container-center">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          className="space-y-16"
+          viewport={{ once: true, amount: 0.12 }}
+          className="grid gap-12 lg:grid-cols-[0.72fr_1.28fr]"
         >
-          {/* Section Header */}
-          <motion.div variants={itemVariants} className="text-center">
-            <h2 className="font-display text-4xl sm:text-5xl font-bold mb-4">
-              Work <span className="gradient-text">Experience</span>
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              My professional journey building innovative solutions and leading
-              technical initiatives
+          <motion.div variants={itemVariants} className="lg:sticky lg:top-32 lg:self-start">
+            <p className="section-kicker">Career Rail</p>
+            <h2 className="section-title">From product engineering to production AI systems.</h2>
+            <p className="section-copy">
+              A compact view of the work: shipped interfaces, cloud services,
+              AI workflows, data pipelines, and measurable operational gains.
             </p>
+
+            <div className="mt-8 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+              {[
+                ["4", "engineering roles"],
+                ["90%+", "benchmark accuracy"],
+                ["100%", "citation-backed responses"],
+              ].map(([value, label]) => (
+                <div
+                  key={label}
+                  className="rounded-2xl border border-ink-900/10 bg-white/[0.55] p-4 dark:border-white/10 dark:bg-white/[0.045]"
+                >
+                  <p className="text-2xl font-black tracking-tight">{value}</p>
+                  <p className="mt-1 text-sm text-ink-500 dark:text-ink-400">{label}</p>
+                </div>
+              ))}
+            </div>
           </motion.div>
 
-          {/* Timeline */}
-          <div className="relative">
-            {/* Timeline Line */}
+          <div ref={timelineRef} className="relative">
+            <div className="absolute left-4 top-0 h-full w-px bg-ink-900/10 dark:bg-white/10 md:left-6" />
             <motion.div
-              variants={timelineVariants}
-              className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-primary-500 to-primary-600 origin-top"
+              style={{ scaleY }}
+              className="absolute left-4 top-0 h-full w-px origin-top bg-gradient-to-b from-primary-400 via-signal-green to-signal-violet md:left-6"
             />
 
-            {/* Experience Items */}
-            <div className="space-y-12">
-              {experience.map((exp, index) => (
-                <motion.div
-                  key={exp.id}
-                  variants={itemVariants}
-                  className={`relative flex items-center ${
-                    index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
-                >
-                  {/* Timeline Node */}
-                  <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 bg-primary-600 rounded-full border-4 border-white dark:border-dark-900 z-10" />
-
-                  {/* Content */}
-                  <div
-                    className={`w-full md:w-5/12 ml-12 md:ml-0 ${
-                      index % 2 === 0 ? "md:pr-8" : "md:pl-8"
-                    }`}
+            <div className="space-y-6">
+              {experience.map((exp, index) => {
+                const metric = exp.achievements.map(metricFromAchievement).find(Boolean);
+                return (
+                  <motion.article
+                    key={exp.id}
+                    variants={itemVariants}
+                    className="relative pl-12 md:pl-16"
                   >
+                    <div className="absolute left-0 top-7 z-10 grid h-8 w-8 place-items-center rounded-full border border-primary-400/[0.35] bg-ink-50 text-primary-700 shadow-glow dark:bg-ink-950 dark:text-primary-200 md:left-2">
+                      <span className="h-2.5 w-2.5 rounded-full bg-primary-400" />
+                    </div>
+
                     <motion.div
-                      className="card p-6 hover:shadow-xl transition-all duration-300"
-                      whileHover={{ y: -5, scale: 1.02 }}
+                      className="panel-border p-5 sm:p-6"
+                      whileHover={{ y: -3 }}
+                      transition={{ type: "spring", stiffness: 260, damping: 24 }}
                     >
-                      {/* Company Header */}
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="flex items-center gap-3">
-                          <div className="p-2 bg-primary-100 dark:bg-primary-900 rounded-lg">
-                            <Building className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+                      <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+                        <div>
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="pill">
+                              <Building2 size={14} />
+                              {exp.company}
+                            </span>
+                            <span className="pill">{exp.type}</span>
                           </div>
-                          <div>
-                            <h3 className="font-bold text-xl">{exp.company}</h3>
-                            <p className="text-primary-600 dark:text-primary-400 font-medium">
-                              {exp.position}
+                          <h3 className="mt-4 text-2xl font-black tracking-tight">
+                            {exp.position}
+                          </h3>
+                          <div className="mt-3 flex flex-wrap gap-4 text-sm text-ink-500 dark:text-ink-400">
+                            <span className="inline-flex items-center gap-1.5">
+                              <Calendar size={14} />
+                              {exp.duration}
+                            </span>
+                            <span className="inline-flex items-center gap-1.5">
+                              <MapPin size={14} />
+                              {exp.location}
+                            </span>
+                          </div>
+                        </div>
+
+                        {metric && (
+                          <div className="rounded-2xl border border-signal-green/25 bg-signal-green/10 p-4 text-left lg:min-w-36">
+                            <TrendingUp className="h-5 w-5 text-signal-green" />
+                            <p className="mt-3 text-3xl font-black tracking-tight">{metric}</p>
+                            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-500 dark:text-ink-400">
+                              impact signal
                             </p>
                           </div>
-                        </div>
-                        <span
-                          className={`px-3 py-1 rounded-full text-xs font-medium ${
-                            exp.type === "Full-time"
-                              ? "bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200"
-                              : "bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200"
-                          }`}
-                        >
-                          {exp.type}
-                        </span>
+                        )}
                       </div>
 
-                      {/* Details */}
-                      <div className="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400 mb-4">
-                        <div className="flex items-center gap-1">
-                          <Calendar size={14} />
-                          <span>{exp.duration}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <MapPin size={14} />
-                          <span>{exp.location}</span>
-                        </div>
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                      <p className="mt-5 max-w-3xl text-sm leading-7 text-ink-600 dark:text-ink-300">
                         {exp.description}
                       </p>
 
-                      {/* Achievements */}
-                      <div className="space-y-3 mb-6">
-                        <h4 className="font-semibold text-sm">
-                          Key Achievements:
-                        </h4>
-                        <ul className="space-y-2">
-                          {exp.achievements.map((achievement) => (
-                            <li
-                              key={achievement}
-                              className="flex items-start gap-2 text-sm"
-                            >
-                              <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                              <span className="text-gray-600 dark:text-gray-400">
-                                {achievement}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* Technologies */}
-                      <div className="space-y-3">
-                        <h4 className="font-semibold text-sm">
-                          Technologies Used:
-                        </h4>
-                        <div className="flex flex-wrap gap-2">
-                          {exp.technologies.map((tech) => (
-                            <span
-                              key={tech}
-                              className="px-3 py-1 bg-gray-100 dark:bg-dark-700 rounded-full text-xs font-medium hover:bg-primary-100 dark:hover:bg-primary-900 transition-colors"
-                            >
-                              {tech}
+                      <ul className="mt-5 grid gap-3">
+                        {exp.achievements.slice(0, index < 2 ? 3 : 2).map((achievement) => (
+                          <li key={achievement} className="flex items-start gap-3">
+                            <CheckCircle2 className="mt-0.5 h-4 w-4 flex-none text-primary-600 dark:text-primary-300" />
+                            <span className="text-sm leading-6 text-ink-700 dark:text-ink-200">
+                              {achievement}
                             </span>
-                          ))}
-                        </div>
+                          </li>
+                        ))}
+                      </ul>
+
+                      <div className="mt-6 flex flex-wrap gap-2">
+                        {exp.technologies.slice(0, 8).map((tech) => (
+                          <span key={tech} className="pill">
+                            {tech}
+                          </span>
+                        ))}
+                        {exp.technologies.length > 8 && (
+                          <span className="pill">+{exp.technologies.length - 8}</span>
+                        )}
                       </div>
                     </motion.div>
-                  </div>
-
-                  {/* Spacer for larger screens */}
-                  <div className="hidden md:block md:w-2/12" />
-                </motion.div>
-              ))}
+                  </motion.article>
+                );
+              })}
             </div>
           </div>
-
-          {/* Call to Action */}
-          <motion.div variants={itemVariants} className="text-center">
-            <div className="card p-8 max-w-2xl mx-auto">
-              <h3 className="text-2xl font-bold mb-4">
-                Ready to Work Together?
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
-                I'm always excited to take on new challenges and contribute to
-                innovative projects.
-              </p>
-              <motion.button
-                onClick={() => {
-                  const element = document.querySelector("#contact");
-                  if (element) {
-                    element.scrollIntoView({ behavior: "smooth" });
-                  }
-                }}
-                className="btn-primary inline-flex items-center gap-2"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span>Let's Connect</span>
-                <ExternalLink size={16} />
-              </motion.button>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>

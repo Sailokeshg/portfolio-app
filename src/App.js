@@ -12,7 +12,8 @@ import "./index.css";
 function App() {
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+      <div className="site-bg relative min-h-screen overflow-hidden bg-ink-50 text-ink-900 transition-colors duration-300 dark:bg-ink-950 dark:text-ink-50">
+        <div className="grid-overlay pointer-events-none fixed inset-0 -z-10 bg-grid-light dark:bg-grid-dark" />
         <Navigation />
         <main>
           <Hero />

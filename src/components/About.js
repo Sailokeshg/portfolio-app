@@ -1,232 +1,213 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { GraduationCap, MapPin, Calendar, Award } from "lucide-react";
+import {
+  Boxes,
+  BrainCircuit,
+  Calendar,
+  GraduationCap,
+  Layers,
+  MapPin,
+  ServerCog,
+} from "lucide-react";
 import { education, skills } from "../data/portfolio";
 
+const sectionVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 24, filter: "blur(8px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+const capabilityBlocks = [
+  {
+    title: "AI Knowledge Systems",
+    icon: BrainCircuit,
+    copy: "RAG chatbots, semantic retrieval, grounded answers, vector search, and LLM workflows built for enterprise reliability.",
+    tags: ["RAG", "Agentic AI", "pgvector", "Azure AI"],
+  },
+  {
+    title: "Product Engineering",
+    icon: Layers,
+    copy: "Full-stack applications with fast React interfaces, API architecture, product polish, and measurable user impact.",
+    tags: ["React", "FastAPI", "Node.js", "Flutter"],
+  },
+  {
+    title: "Cloud & Data Infrastructure",
+    icon: ServerCog,
+    copy: "Production pipelines, CI/CD, cloud deployments, analytics systems, and scalable data services.",
+    tags: ["AWS", "Docker", "PostgreSQL", "ETL"],
+  },
+];
+
+const categoryLabels = {
+  frontend: "Interface",
+  backend: "Services",
+  database: "Data",
+  cloud: "Cloud",
+  tools: "Workflow",
+};
+
 const About = () => {
-  const [selectedSkillCategory, setSelectedSkillCategory] = useState("all");
+  const [activeCategory, setActiveCategory] = useState("all");
 
-  const skillCategories = [
-    "all",
-    "Frontend",
-    "Backend",
-    "Database",
-    "Cloud",
-    "Tools",
-  ];
+  const skillGroups = useMemo(
+    () =>
+      Object.entries(skills).map(([key, values]) => ({
+        key,
+        label: categoryLabels[key] || key,
+        values,
+      })),
+    []
+  );
 
-  const filteredSkills =
-    selectedSkillCategory === "all"
-      ? Object.values(skills).flat()
-      : Object.values(skills)
-          .flat()
-          .filter((skill) => skill.category === selectedSkillCategory);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    },
-  };
+  const visibleGroups =
+    activeCategory === "all"
+      ? skillGroups
+      : skillGroups.filter((group) => group.key === activeCategory);
 
   return (
-    <section id="about" className="section-padding bg-gray-50 dark:bg-dark-800">
+    <section id="about" className="section-padding relative">
       <div className="container-center">
         <motion.div
-          variants={containerVariants}
+          variants={sectionVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          className="space-y-16"
+          viewport={{ once: true, amount: 0.18 }}
+          className="grid gap-12 lg:grid-cols-[0.78fr_1.22fr]"
         >
-          {/* Section Header */}
-          <motion.div variants={itemVariants} className="text-center">
-            <h2 className="font-display text-4xl sm:text-5xl font-bold mb-4">
-              About <span className="gradient-text">Me</span>
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              Passionate about creating innovative solutions and building
-              scalable applications
+          <motion.div variants={itemVariants} className="lg:sticky lg:top-32 lg:self-start">
+            <p className="section-kicker">Engineering Profile</p>
+            <h2 className="section-title">What I build when the system needs to be smart.</h2>
+            <p className="section-copy">
+              My work sits where AI capability becomes real software: retrieval
+              systems, product workflows, cloud services, and interfaces that
+              make complex tools feel direct.
             </p>
           </motion.div>
 
-          {/* Education Section */}
-          <motion.div variants={itemVariants} className="space-y-8">
-            <h3 className="text-2xl font-bold text-center mb-8">Education</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {education.map((edu, index) => (
-                <motion.div
-                  key={edu.id}
-                  variants={itemVariants}
-                  className="card p-6 hover:shadow-xl transition-all duration-300"
-                  whileHover={{ y: -5 }}
+          <div className="space-y-6">
+            <motion.div variants={itemVariants} className="grid gap-4 md:grid-cols-3">
+              {capabilityBlocks.map((block) => (
+                <motion.article
+                  key={block.title}
+                  className="panel-border p-5"
+                  whileHover={{ y: -4 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 24 }}
                 >
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 bg-primary-100 dark:bg-primary-900 rounded-lg">
-                      <GraduationCap className="w-6 h-6 text-primary-600 dark:text-primary-400" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-bold text-lg mb-2">{edu.degree}</h4>
-                      <p className="text-primary-600 dark:text-primary-400 font-medium mb-2">
-                        {edu.institution}
-                      </p>
-                      <div className="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400 mb-4">
-                        <div className="flex items-center gap-1">
-                          <MapPin size={14} />
-                          <span>{edu.location}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Calendar size={14} />
-                          <span>{edu.duration}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Award size={14} />
-                          <span>GPA: {edu.gpa}</span>
-                        </div>
-                      </div>
-                      <div className="space-y-2">
-                        <p className="font-medium text-sm">
-                          Relevant Coursework:
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                          {edu.coursework.map((course) => (
-                            <span
-                              key={course}
-                              className="px-2 py-1 bg-gray-100 dark:bg-dark-700 rounded text-xs"
-                            >
-                              {course}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl border border-primary-400/25 bg-primary-400/10 text-primary-700 dark:text-primary-200">
+                    <block.icon size={23} />
                   </div>
-                </motion.div>
+                  <h3 className="mt-6 text-xl font-black tracking-tight">{block.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-ink-600 dark:text-ink-300">
+                    {block.copy}
+                  </p>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {block.tags.map((tag) => (
+                      <span key={tag} className="pill">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </motion.article>
               ))}
-            </div>
-          </motion.div>
+            </motion.div>
 
-          {/* Skills Section */}
-          <motion.div variants={itemVariants} className="space-y-8">
-            <h3 className="text-2xl font-bold text-center mb-8">
-              Technical Skills
-            </h3>
-
-            {/* Skill Category Filter */}
-            <div className="flex flex-wrap justify-center gap-2 mb-8">
-              {skillCategories.map((category) => (
-                <motion.button
-                  key={category}
-                  onClick={() => setSelectedSkillCategory(category)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                    selectedSkillCategory === category
-                      ? "bg-primary-600 text-white"
-                      : "bg-gray-200 dark:bg-dark-700 hover:bg-gray-300 dark:hover:bg-dark-600"
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {category.charAt(0).toUpperCase() + category.slice(1)}
-                </motion.button>
-              ))}
-            </div>
-
-            {/* Skills Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredSkills.map((skill, index) => (
-                <motion.div
-                  key={skill.name}
-                  className="card p-6"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <div className="flex items-center justify-between mb-3">
-                    <h4 className="font-semibold">{skill.name}</h4>
-                    <span className="text-sm text-gray-600 dark:text-gray-400">
-                      {skill.level}%
-                    </span>
+            <motion.div variants={itemVariants} className="panel-border p-5 sm:p-6">
+              <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
+                <div>
+                  <div className="flex items-center gap-3">
+                    <Boxes className="h-5 w-5 text-primary-600 dark:text-primary-300" />
+                    <h3 className="text-2xl font-black tracking-tight">AI Engineering Stack</h3>
                   </div>
-                  <div className="w-full bg-gray-200 dark:bg-dark-700 rounded-full h-2">
-                    <motion.div
-                      className="bg-gradient-to-r from-primary-500 to-primary-600 h-2 rounded-full"
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${skill.level}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1, delay: index * 0.1 }}
-                    />
-                  </div>
-                  <div className="mt-2">
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
-                      {skill.category}
-                    </span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Personal Info */}
-          <motion.div variants={itemVariants} className="text-center">
-            <div className="card p-8 max-w-4xl mx-auto">
-              <h3 className="text-2xl font-bold mb-6">Why Work With Me?</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-                <div className="space-y-3">
-                  <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center mx-auto md:mx-0">
-                    <span className="text-2xl">🚀</span>
-                  </div>
-                  <h4 className="font-semibold text-center md:text-left">
-                    Innovation Driven
-                  </h4>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm text-center md:text-left">
-                    Always exploring new technologies and approaches to solve
-                    complex problems efficiently.
+                  <p className="mt-2 text-sm leading-6 text-ink-600 dark:text-ink-300">
+                    Grouped by how the work actually ships: interfaces, services,
+                    data, infrastructure, and team workflow.
                   </p>
                 </div>
-                <div className="space-y-3">
-                  <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center mx-auto md:mx-0">
-                    <span className="text-2xl">🎯</span>
-                  </div>
-                  <h4 className="font-semibold text-center md:text-left">
-                    Results Focused
-                  </h4>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm text-center md:text-left">
-                    Committed to delivering high-quality solutions that meet
-                    business objectives and user needs.
-                  </p>
-                </div>
-                <div className="space-y-3">
-                  <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center mx-auto md:mx-0">
-                    <span className="text-2xl">🤝</span>
-                  </div>
-                  <h4 className="font-semibold text-center md:text-left">
-                    Team Player
-                  </h4>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm text-center md:text-left">
-                    Excellent communication skills and experience working in
-                    collaborative environments.
-                  </p>
+                <div className="flex flex-wrap gap-2">
+                  {["all", ...skillGroups.map((group) => group.key)].map((category) => (
+                    <button
+                      key={category}
+                      onClick={() => setActiveCategory(category)}
+                      className={`rounded-full px-3 py-2 text-xs font-bold transition-all ${
+                        activeCategory === category
+                          ? "bg-ink-950 text-white dark:bg-white dark:text-ink-950"
+                          : "border border-ink-900/10 bg-white/[0.55] text-ink-600 hover:text-ink-950 dark:border-white/10 dark:bg-white/[0.045] dark:text-ink-300 dark:hover:text-white"
+                      }`}
+                    >
+                      {category === "all" ? "All" : categoryLabels[category] || category}
+                    </button>
+                  ))}
                 </div>
               </div>
-            </div>
-          </motion.div>
+
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                {visibleGroups.map((group) => (
+                  <motion.div
+                    key={group.key}
+                    layout
+                    className="rounded-2xl border border-ink-900/10 bg-ink-900/[0.025] p-4 dark:border-white/10 dark:bg-white/[0.035]"
+                  >
+                    <p className="mb-4 text-sm font-black uppercase tracking-[0.18em] text-ink-500 dark:text-ink-400">
+                      {group.label}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {group.values.map((skill) => (
+                        <span
+                          key={skill.name}
+                          className="rounded-xl border border-ink-900/10 bg-white px-3 py-2 text-sm font-semibold text-ink-700 dark:border-white/10 dark:bg-white/[0.06] dark:text-ink-200"
+                        >
+                          {skill.name}
+                        </span>
+                      ))}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="grid gap-4 md:grid-cols-2">
+              {education.map((edu) => (
+                <article
+                  key={edu.id}
+                  className="rounded-3xl border border-ink-900/10 bg-white/[0.55] p-5 backdrop-blur dark:border-white/10 dark:bg-white/[0.045]"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="grid h-11 w-11 flex-none place-items-center rounded-2xl border border-signal-violet/25 bg-signal-violet/10 text-signal-violet">
+                      <GraduationCap size={21} />
+                    </div>
+                    <div>
+                      <p className="text-lg font-black tracking-tight">{edu.degree}</p>
+                      <p className="mt-1 font-semibold text-primary-700 dark:text-primary-300">
+                        {edu.institution}
+                      </p>
+                      <div className="mt-3 flex flex-wrap gap-3 text-sm text-ink-500 dark:text-ink-400">
+                        <span className="inline-flex items-center gap-1.5">
+                          <MapPin size={14} />
+                          {edu.location}
+                        </span>
+                        <span className="inline-flex items-center gap-1.5">
+                          <Calendar size={14} />
+                          {edu.duration}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>
