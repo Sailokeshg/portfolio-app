@@ -3,21 +3,39 @@ import { ArrowUpRight } from "lucide-react";
 import { projects } from "../data/portfolio";
 
 // Drawn stand-ins for screenshots, so the cards need no image assets.
-const ChatPreview = () => (
-  <div className="w-full max-w-[420px] space-y-3 rounded-2xl bg-white p-5 shadow-float">
-    <div className="flex items-center gap-2.5 border-b border-[#ECEDF1] pb-3">
-      <span className="h-7 w-7 rounded-full bg-cobalt" />
-      <span className="text-sm font-semibold">CSUEB Assistant</span>
+const agentSteps = [
+  { name: "Planner", detail: "tasks planned" },
+  { name: "Architect", detail: "design ready" },
+  { name: "Coder", detail: "patch, iteration 2" },
+  { name: "Tester", detail: "2 tests passing" },
+  { name: "Reviewer", detail: "approved" },
+];
+
+const AgentsPreview = () => (
+  <div className="w-full max-w-[420px] space-y-3.5 rounded-2xl bg-white p-5 shadow-float">
+    <div className="flex items-center justify-between gap-3 border-b border-[#ECEDF1] pb-3">
+      <span className="text-sm font-semibold">Run · Add input validation</span>
+      <span className="rounded-full bg-[#E3F4EA] px-2.5 py-0.5 text-xs font-medium text-[#0F6B3E]">Approved</span>
     </div>
-    <p className="ml-auto max-w-[75%] rounded-[14px_14px_4px_14px] bg-cobalt px-3.5 py-2.5 text-sm leading-snug text-white">
-      How do I add a class after the deadline?
+    <ol className="space-y-2">
+      {agentSteps.map((step) => (
+        <li key={step.name} className="flex items-center gap-2.5 text-sm">
+          <span className="h-2 w-2 flex-none rounded-full bg-cobalt" />
+          <span className="font-medium">{step.name}</span>
+          <span className="ml-auto text-xs text-muted">{step.detail}</span>
+        </li>
+      ))}
+    </ol>
+    <p className="rounded-lg bg-[#F0F1F5] px-3 py-2 text-xs leading-snug text-muted">
+      Repair loop: failing tests go back to Tester, code or security issues to Coder
     </p>
-    <p className="max-w-[80%] rounded-[14px_14px_14px_4px] bg-[#F0F1F5] px-3.5 py-2.5 text-sm leading-snug">
-      Here's the add/drop process for this term and the form you'll need.
-    </p>
-    <p className="rounded-full border border-line px-3.5 py-2.5 text-[13px] text-muted">
-      Type or hold to speak…
-    </p>
+    <div className="flex flex-wrap gap-1.5">
+      {["pytest", "Ruff", "mypy", "Bandit"].map((gate) => (
+        <span key={gate} className="rounded-md border border-line px-2 py-1 font-mono text-[11px]">
+          {gate} ✓
+        </span>
+      ))}
+    </div>
   </div>
 );
 
@@ -43,7 +61,7 @@ const LatexPreview = () => (
   </div>
 );
 
-const previews = { chat: ChatPreview, latex: LatexPreview };
+const previews = { agents: AgentsPreview, latex: LatexPreview };
 
 const Project = ({ project, index }) => {
   const Preview = previews[project.preview];
@@ -65,6 +83,9 @@ const Project = ({ project, index }) => {
         </p>
         <h3 className="font-serif text-[clamp(2.25rem,4vw,3.25rem)] leading-[1.05]">{project.title}</h3>
         <p className="text-lg leading-relaxed">{project.description}</p>
+        {project.note && (
+          <p className="rounded-lg bg-white px-4 py-3.5 text-[15px] leading-normal">{project.note}</p>
+        )}
         <p className="text-[15px] text-muted">{project.technologies.join(", ")}</p>
         <div className="flex flex-wrap gap-3 pt-1.5">
           {project.liveUrl && (
