@@ -28,8 +28,8 @@ const Hero = () => {
         <div className="space-y-2.5">
           <p className="eyebrow">Currently</p>
           <p className="text-lg leading-relaxed">
-            {personalInfo.title} at <strong className="font-semibold">Agadia Systems</strong>{" "}
-            — leading RAG chatbots and AI agents for the engineering lifecycle.
+            {personalInfo.title} at <strong className="font-semibold">Agadia Systems</strong>,
+            leading RAG chatbots and AI agents for the engineering lifecycle.
           </p>
         </div>
         <div className="space-y-2.5">

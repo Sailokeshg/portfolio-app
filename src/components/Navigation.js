@@ -20,7 +20,7 @@ const Navigation = () => {
           {personalInfo.name}
         </a>
         <span className="hidden text-sm text-muted lg:block">
-          {personalInfo.title} — New Jersey
+          {personalInfo.title} · New Jersey
         </span>
 
         <nav aria-label="Primary" className="hidden items-center gap-1 text-[15px] md:flex">

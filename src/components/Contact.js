@@ -74,7 +74,7 @@ const Contact = () => {
             {personalInfo.email}
           </a>
           <p className="max-w-md text-lg leading-relaxed text-muted">
-            Open to software engineering and AI-focused product work — roles,
+            Open to software engineering and AI-focused product work: roles,
             collaborations or a quick chat.
           </p>
           <div className="flex flex-wrap gap-2">

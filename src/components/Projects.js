@@ -61,7 +61,7 @@ const Project = ({ project, index }) => {
       </div>
       <div className="space-y-[18px]">
         <p className="eyebrow">
-          No. {String(index + 1).padStart(2, "0")} — {project.status}
+          No. {String(index + 1).padStart(2, "0")} · {project.status}
         </p>
         <h3 className="font-serif text-[clamp(2.25rem,4vw,3.25rem)] leading-[1.05]">{project.title}</h3>
         <p className="text-lg leading-relaxed">{project.description}</p>

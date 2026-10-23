@@ -5,8 +5,8 @@ import { experience } from "../data/portfolio";
 const formatYears = (duration) => {
   const years = duration.match(/\d{4}/g) || [];
   const isCurrent = /present/i.test(duration);
-  if (isCurrent) return `${years[0]} — Now`;
-  return years[0] === years[1] ? years[0] : `${years[0]} — ${years[1]}`;
+  if (isCurrent) return `${years[0]}–Now`;
+  return years[0] === years[1] ? years[0] : `${years[0]}–${years[1]}`;
 };
 
 const shortLocation = (location) => location.split(",")[0];

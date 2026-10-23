@@ -59,11 +59,11 @@ export const experience = [
     achievements: [
       {
         title: "RAG assistant.",
-        text: "Led architecture and delivery of an enterprise RAG chatbot over 170,000+ technical documents — pgvector hybrid retrieval, persona-aware answers for analysts and developers, SSE token streaming and 100% citation-backed responses. Knowledge lookup is 60% faster.",
+        text: "Led architecture and delivery of an enterprise RAG chatbot over 170,000+ technical documents, using pgvector hybrid retrieval, persona-aware answers for analysts and developers, SSE token streaming and 100% citation-backed responses. Knowledge lookup is 60% faster.",
       },
       {
         title: "Requirements agent.",
-        text: "Built AI generation of Functional Requirements Documents from Jira change requests, pulling in attachments, meeting notes and context from up to five related products — drafting time fell from hours to 5–10 minutes.",
+        text: "Built AI generation of Functional Requirements Documents from Jira change requests, pulling in attachments, meeting notes and context from up to five related products. Drafting time fell from hours to 5–10 minutes.",
       },
       {
         title: "QA agents.",
@@ -190,7 +190,7 @@ export const experience = [
 export const aiWork = [
   {
     id: "code-to-docs",
-    eyebrow: "Case A — Internal tooling",
+    eyebrow: "Case A · Internal tooling",
     title: "Code-to-Docs: documentation that writes itself",
     description:
       "Give it a Git repository and it returns Architecture, Technical and Functional documents ready for the wiki. Static parsers turn the code into AST JSON, the LLM writes each document in a single pass, and a knowledge graph we built of the system validates what it says.",
@@ -210,10 +210,10 @@ export const aiWork = [
   },
   {
     id: "jira-to-tests",
-    eyebrow: "Case B — Internal SDLC platform",
+    eyebrow: "Case B · Internal SDLC platform",
     title: "From Jira ticket to tested feature, with agents",
     description:
-      "AI workflows that turn a Jira change request into a Functional Requirements Document, then a test plan, a validated test-case suite and an automated run — with people approving what the model proposes.",
+      "AI workflows that turn a Jira change request into a Functional Requirements Document, then a test plan, a validated test-case suite and an automated run, with people approving what the model proposes.",
     stats: [
       { value: "5–10 min", label: "To draft an FRD that used to take hours" },
       { value: "≥ 80%", label: "Requirement coverage enforced by a validator agent" },
@@ -323,7 +323,7 @@ export const toolkit = [
 
 // Headline numbers for the results band, from the Agadia RAG work.
 export const results = {
-  caption: "Enterprise RAG at Agadia Systems, 2026 — by the numbers",
+  caption: "Enterprise RAG at Agadia Systems, 2026: by the numbers",
   items: [
     { value: "170K+", label: "technical documents indexed" },
     { value: "60%", label: "faster knowledge lookup" },
