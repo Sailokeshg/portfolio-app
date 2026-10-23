@@ -26,8 +26,8 @@ const Role = ({ job, isFirst }) => {
           </p>
         </div>
         <p className="min-w-0 flex-[2_1_380px] text-[17px] leading-relaxed">{job.summary}</p>
-        <div className="flex basis-[140px] flex-col gap-0.5">
-          <span className="font-serif text-[44px] leading-none text-cobalt">{job.highlight.value}</span>
+        <div className="flex basis-[180px] flex-col gap-0.5">
+          <span className="whitespace-nowrap font-serif text-[44px] leading-none text-cobalt">{job.highlight.value}</span>
           <span className="text-sm text-muted">{job.highlight.label}</span>
         </div>
       </div>
@@ -46,9 +46,16 @@ const Role = ({ job, isFirst }) => {
         {isOpen && (
           <div id={detailsId} className="max-w-3xl space-y-5 pb-2 pt-3">
             <ul className="list-disc space-y-2.5 pl-5 text-base leading-relaxed text-ink/85 marker:text-cobalt">
-              {job.achievements.map((achievement) => (
-                <li key={achievement}>{achievement}</li>
-              ))}
+              {job.achievements.map((achievement) =>
+                typeof achievement === "string" ? (
+                  <li key={achievement}>{achievement}</li>
+                ) : (
+                  <li key={achievement.title}>
+                    <strong className="font-semibold text-ink">{achievement.title}</strong>{" "}
+                    {achievement.text}
+                  </li>
+                )
+              )}
             </ul>
             <p className="text-[15px] text-muted">{job.technologies.join(", ")}</p>
           </div>

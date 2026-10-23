@@ -43,32 +43,54 @@ export const education = [
 ];
 
 export const experience = [
-      {
+  {
     id: 1,
     company: "Agadia Systems",
     summary:
-      "Led an enterprise RAG chatbot (Angular, FastAPI, Azure) over 170,000+ technical documents, with pgvector hybrid retrieval and an ingestion pipeline built for 400-page manuals.",
-    highlight: { value: "−45%", label: "response latency" },
+      "Building the AI layer of Agadia's internal knowledge and SDLC platform: a RAG assistant over 170,000+ documents, agents that turn Jira change requests into requirements and test suites, and a pipeline that documents codebases on its own.",
+    highlight: { value: "5–10 min", label: "per FRD, down from hours" },
     position: "Software Engineer, AI",
     duration: "Jan 2026 - Present",
     location: "New Jersey, NJ",
     type: "Full-time",
     description:
       "Leading AI integration to improve enterprise level software development lifecycle using RAG Chatbots and AI Agents.",
+    // Achievements may be plain strings or { title, text } for a bold lead-in.
     achievements: [
-      "Led the end-to-end architecture and delivery of an enterprise RAG-based AI chatbot (Angular, FastAPI, Azure) over 170,000+ technical documents, reducing engineering knowledge lookup time by 60% through advanced LLM-powered semantic search.",
-     "Architected scalable LLM workflows using PostgreSQL + pgvector for vector similarity search with hybrid retrieval and strict metadata filtering (document/version/section-level constraints), improving retrieval precision by 35% and ensuring 100% citation-backed responses.",
-     "Designed a high-performance ingestion and embedding pipeline for 100–400 page technical manuals (including code blocks and architecture diagrams), reducing hallucinations by 50% and achieving 90%+ answer accuracy on internal benchmarks.",
-     "Optimized Azure-hosted inference, indexing, and caching strategies to cut end-to-end response latency by 45%, supporting high-concurrency enterprise usage with production-grade monitoring and evaluation metrics."
+      {
+        title: "RAG assistant.",
+        text: "Led architecture and delivery of an enterprise RAG chatbot over 170,000+ technical documents — pgvector hybrid retrieval, persona-aware answers for analysts and developers, SSE token streaming and 100% citation-backed responses. Knowledge lookup is 60% faster.",
+      },
+      {
+        title: "Requirements agent.",
+        text: "Built AI generation of Functional Requirements Documents from Jira change requests, pulling in attachments, meeting notes and context from up to five related products — drafting time fell from hours to 5–10 minutes.",
+      },
+      {
+        title: "QA agents.",
+        text: "Generated test plans and test-case suites from FRDs, gated by a QA-architect validator agent that enforces 80% requirement coverage, then ran them automatically with Playwright and LangChain MCP agents.",
+      },
+      {
+        title: "Agentic editing.",
+        text: "Shipped document editing where the model proposes changes and people approve them, with SHA-256 content hashes blocking conflicting edits.",
+      },
+      {
+        title: "Code-to-docs pipeline.",
+        text: "Designed an LLM pipeline that turns a Git repository into Architecture, Technical and Functional documentation in a single pass from parser ASTs, validated against a knowledge graph we built.",
+      },
+      {
+        title: "Performance.",
+        text: "Tuned Azure-hosted inference, indexing and caching to cut response latency by 45% under high-concurrency use.",
+      },
     ],
     technologies: [
-      "RAG",
-      "Agentic AI",
-      "Azure AI",
+      "Claude",
+      "Azure OpenAI (GPT-4o)",
+      "LangChain",
+      "MCP",
+      "pgvector",
       "FastAPI",
       "Angular",
-      "Vector DB",
-      "ML Pipelines"
+      "Playwright",
     ],
   },
     {
@@ -161,6 +183,54 @@ export const experience = [
       "CI/CD",
       "Automated Testing",
     ],
+  },
+];
+
+// Professional AI case studies, shown between Experience and side projects.
+export const aiWork = [
+  {
+    id: "code-to-docs",
+    eyebrow: "Case A — Internal tooling",
+    title: "Code-to-Docs: documentation that writes itself",
+    description:
+      "Give it a Git repository and it returns Architecture, Technical and Functional documents ready for the wiki. Static parsers turn the code into AST JSON, the LLM writes each document in a single pass, and a knowledge graph we built of the system validates what it says.",
+    stats: [
+      { value: "4 parsers", label: "Angular, C#, Python and SQL, traced from UI to database" },
+      { value: "1 pass", label: "Each document generated straight from the AST JSON" },
+      { value: "Graph-checked", label: "Output validated against a knowledge graph we built" },
+      { value: "3 docs", label: "Architecture (C4), Technical and Functional, per repository" },
+    ],
+    proof: {
+      lead: "Run on our own production platform:",
+      emphasis: "156 frontend files, 90+ endpoints and 42 tables",
+      tail: "documented end to end.",
+    },
+    technologies: ["Claude", "tree-sitter", "Roslyn", "Python ast", "knowledge graph", "Pydantic"],
+    preview: "docs-pipeline",
+  },
+  {
+    id: "jira-to-tests",
+    eyebrow: "Case B — Internal SDLC platform",
+    title: "From Jira ticket to tested feature, with agents",
+    description:
+      "AI workflows that turn a Jira change request into a Functional Requirements Document, then a test plan, a validated test-case suite and an automated run — with people approving what the model proposes.",
+    stats: [
+      { value: "5–10 min", label: "To draft an FRD that used to take hours" },
+      { value: "≥ 80%", label: "Requirement coverage enforced by a validator agent" },
+      { value: "Human-approved", label: "Agent edits are proposals; content hashes block conflicts" },
+      { value: "Streaming", label: "SSE output and background jobs with live progress" },
+    ],
+    technologies: [
+      "Claude",
+      "Azure OpenAI (GPT-4o)",
+      "LangChain",
+      "MCP",
+      "Playwright",
+      "FastAPI",
+      "Angular",
+      "PostgreSQL",
+    ],
+    preview: "sdlc-chain",
   },
 ];
 
