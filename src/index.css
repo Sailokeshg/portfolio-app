@@ -5,109 +5,58 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
 
   body {
-    @apply bg-ink-50 font-sans text-ink-900 antialiased transition-colors duration-300;
-    @apply dark:bg-ink-950 dark:text-ink-50;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-    background-image:
-      linear-gradient(to bottom, rgba(6, 182, 212, 0.055), transparent 22rem),
-      linear-gradient(to right, rgba(13, 14, 16, 0.035) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(13, 14, 16, 0.035) 1px, transparent 1px);
-    background-size: auto, 56px 56px, 56px 56px;
+    @apply bg-paper font-sans text-ink antialiased;
   }
 
-  .dark body {
-    background-image:
-      linear-gradient(to bottom, rgba(6, 182, 212, 0.09), transparent 24rem),
-      linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  a {
+    @apply transition-colors;
+  }
+
+  :focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-cobalt;
   }
 
   ::selection {
-    @apply bg-primary-200 text-ink-950;
+    @apply bg-cobalt text-white;
   }
 }
 
 @layer components {
-  .container-center {
-    @apply mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8;
+  .container-page {
+    @apply mx-auto w-full max-w-[1280px] px-4 sm:px-8 lg:px-14;
   }
 
-  .section-padding {
-    @apply py-16 sm:py-24;
+  .display-title {
+    @apply font-serif text-[clamp(2.75rem,6vw,5rem)] font-normal leading-none;
   }
 
-  .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-ink-950 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all;
-    @apply hover:-translate-y-0.5 hover:bg-ink-800 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 focus:ring-offset-ink-50;
-    @apply dark:bg-white dark:text-ink-950 dark:hover:bg-ink-100 dark:focus:ring-offset-ink-950;
+  .eyebrow {
+    @apply text-[13px] font-semibold uppercase tracking-[0.08em] text-muted;
   }
 
-  .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-ink-900/10 bg-white/80 px-4 py-2.5 text-sm font-semibold text-ink-800 shadow-sm backdrop-blur transition-all;
-    @apply hover:-translate-y-0.5 hover:border-ink-900/20 hover:bg-white hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 focus:ring-offset-ink-50;
-    @apply dark:border-white/10 dark:bg-white/[0.04] dark:text-ink-100 dark:hover:bg-white/[0.08] dark:focus:ring-offset-ink-950;
+  .text-link {
+    @apply underline decoration-[#A9AEBB] underline-offset-4 hover:text-cobalt hover:decoration-cobalt;
   }
 
-  .nav-link {
-    @apply rounded-md px-2.5 py-2 text-sm font-medium text-ink-600 transition-colors hover:text-ink-950;
-    @apply dark:text-ink-300 dark:hover:text-white;
+  .btn-solid {
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-ink px-6 text-[15px] font-medium text-white hover:bg-cobalt disabled:cursor-not-allowed disabled:opacity-60;
   }
 
-  .section-kicker {
-    @apply text-sm font-bold uppercase tracking-[0.16em] text-primary-700 dark:text-primary-300;
+  .btn-outline {
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border border-ink px-6 text-[15px] font-medium hover:border-cobalt hover:text-cobalt;
   }
 
-  .section-title {
-    @apply mt-2 text-3xl font-bold tracking-tight text-ink-950 dark:text-white sm:text-4xl lg:text-5xl;
+  .chip-link {
+    @apply inline-flex min-h-[44px] items-center rounded-full border border-[#A9AEBB] px-[18px] text-base hover:border-cobalt hover:text-cobalt;
   }
 
-  .section-copy {
-    @apply mt-4 max-w-2xl text-base leading-7 text-ink-600 dark:text-ink-300;
-  }
-
-  .card {
-    @apply rounded-2xl border border-ink-900/10 bg-white/85 p-5 shadow-sm backdrop-blur transition-all;
-    @apply hover:-translate-y-0.5 hover:border-primary-500/25 hover:shadow-md;
-    @apply dark:border-white/10 dark:bg-white/[0.045] dark:hover:border-primary-300/25;
-  }
-
-  .panel-border {
-    @apply rounded-2xl border border-ink-900/10 bg-white/85 p-5 shadow-sm backdrop-blur;
-    @apply dark:border-white/10 dark:bg-white/[0.04];
-  }
-
-  .pill {
-    @apply inline-flex items-center rounded-full border border-ink-900/10 bg-white/75 px-2.5 py-1 text-xs font-semibold text-ink-700 shadow-sm;
-    @apply dark:border-white/10 dark:bg-white/[0.06] dark:text-ink-200;
-  }
-
-  .metric-card {
-    @apply rounded-2xl border border-ink-900/10 bg-white/80 p-4 shadow-sm backdrop-blur;
-    @apply dark:border-white/10 dark:bg-white/[0.045];
-  }
-
-  .accent-line {
-    @apply relative pl-4;
-  }
-
-  .accent-line::before {
-    content: "";
-    @apply absolute bottom-1 left-0 top-1 w-1 rounded-full bg-primary-500;
-  }
-
-  .input-field {
-    @apply w-full rounded-lg border border-ink-900/10 bg-white px-3.5 py-2.5 text-sm text-ink-950 outline-none transition-colors placeholder:text-ink-400;
-    @apply focus:border-primary-400 focus:ring-2 focus:ring-primary-400/20;
-    @apply dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:placeholder:text-ink-500;
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .field {
+    @apply w-full rounded-lg border border-line bg-white px-3.5 py-3 text-base text-ink outline-none placeholder:text-[#8A8D96];
+    @apply focus:border-cobalt focus:ring-2 focus:ring-cobalt/20;
   }
 }
 

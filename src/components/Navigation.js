@@ -1,111 +1,66 @@
-import React, { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { Menu, Moon, Sun, X } from "lucide-react";
-import { useTheme } from "../contexts/ThemeContext";
+import React, { useState } from "react";
+import { Menu, X } from "lucide-react";
 import { personalInfo } from "../data/portfolio";
 
 const navigationItems = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Experience", href: "#experience" },
+  { name: "Work", href: "#work" },
   { name: "Projects", href: "#projects" },
-  { name: "Contact", href: "#contact" },
+  { name: "About", href: "#about" },
 ];
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const { isDarkMode, toggleTheme } = useTheme();
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 8);
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const handleNavClick = (href) => {
-    setIsMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <header
-      className={`sticky top-0 z-50 border-b transition-colors ${
-        isScrolled
-          ? "border-ink-900/10 bg-ink-50/90 backdrop-blur dark:border-white/10 dark:bg-ink-950/90"
-          : "border-transparent bg-ink-50 dark:bg-ink-950"
-      }`}
-    >
-      <nav className="container-center flex h-16 items-center justify-between">
-        <button
-          onClick={() => handleNavClick("#home")}
-          className="text-left"
-          aria-label="Go to home"
-        >
-          <span className="block text-sm font-bold tracking-tight text-ink-950 dark:text-white">
-            {personalInfo.name}
-          </span>
-          <span className="block text-xs text-ink-500 dark:text-ink-400">
-            Software Engineer
-          </span>
-        </button>
+    <header className="sticky top-0 z-50 border-b border-line bg-paper/90 backdrop-blur">
+      <div className="container-page flex items-center justify-between gap-4 py-3">
+        <a href="#top" className="font-serif text-[26px] leading-none hover:text-cobalt">
+          {personalInfo.name}
+        </a>
+        <span className="hidden text-sm text-muted lg:block">
+          {personalInfo.title} — New Jersey
+        </span>
 
-        <div className="hidden items-center gap-1 md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-1 text-[15px] md:flex">
           {navigationItems.map((item) => (
-            <button
-              key={item.name}
-              onClick={() => handleNavClick(item.href)}
-              className="nav-link"
-            >
+            <a key={item.name} href={item.href} className="px-2.5 py-3 hover:text-cobalt">
               {item.name}
-            </button>
+            </a>
           ))}
-        </div>
+          <a href="#contact" className="px-2.5 py-3 font-medium text-cobalt">
+            Contact
+          </a>
+        </nav>
 
-        <div className="flex items-center gap-2">
-          <button
-            onClick={toggleTheme}
-            className="rounded-lg border border-ink-900/10 p-2 text-ink-600 transition-colors hover:text-ink-950 dark:border-white/10 dark:text-ink-300 dark:hover:text-white"
-            aria-label="Toggle theme"
-          >
-            {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
-          <button
-            onClick={() => setIsMenuOpen((value) => !value)}
-            className="rounded-lg border border-ink-900/10 p-2 text-ink-600 transition-colors hover:text-ink-950 dark:border-white/10 dark:text-ink-300 dark:hover:text-white md:hidden"
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
-          </button>
-        </div>
-      </nav>
+        <button
+          type="button"
+          onClick={() => setIsMenuOpen((value) => !value)}
+          className="-mr-2 flex h-11 w-11 items-center justify-center rounded-full hover:bg-mist md:hidden"
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-menu"
+        >
+          {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+      </div>
 
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="border-t border-ink-900/10 bg-ink-50 dark:border-white/10 dark:bg-ink-950 md:hidden"
-          >
-            <div className="container-center py-3">
-              {navigationItems.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={() => handleNavClick(item.href)}
-                  className="block w-full rounded-lg px-1 py-2 text-left text-sm font-medium text-ink-700 dark:text-ink-200"
-                >
-                  {item.name}
-                </button>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isMenuOpen && (
+        <nav id="mobile-menu" aria-label="Mobile" className="border-t border-line md:hidden">
+          <div className="container-page flex flex-col py-2">
+            {[...navigationItems, { name: "Contact", href: "#contact" }].map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                onClick={closeMenu}
+                className="py-3 font-serif text-2xl hover:text-cobalt"
+              >
+                {item.name}
+              </a>
+            ))}
+          </div>
+        </nav>
+      )}
     </header>
   );
 };

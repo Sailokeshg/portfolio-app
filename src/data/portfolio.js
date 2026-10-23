@@ -1,6 +1,6 @@
 export const personalInfo = {
   name: "Sai Lokesh Reddy",
-  title: "Software Engineer AI",
+  title: "Software Engineer, AI",
   email: "sailokeshreddy@gmail.com",
   phone: "+1 (510) 255-0650",
   linkedin: "https://linkedin.com/in/sailokeshg",
@@ -46,14 +46,17 @@ export const experience = [
       {
     id: 1,
     company: "Agadia Systems",
-    position: "Software Engineer AI",
+    summary:
+      "Led an enterprise RAG chatbot (Angular, FastAPI, Azure) over 170,000+ technical documents, with pgvector hybrid retrieval and an ingestion pipeline built for 400-page manuals.",
+    highlight: { value: "−45%", label: "response latency" },
+    position: "Software Engineer, AI",
     duration: "Jan 2026 - Present",
     location: "New Jersey, NJ",
     type: "Full-time",
     description:
       "Leading AI integration to improve enterprise level software development lifecycle using RAG Chatbots and AI Agents.",
     achievements: [
-      "Led the end-to-end architecture and delivery of an enterprise RAG-based AI chatbot (Angular, FastAPI, Azure) over 40,000+ technical documents, reducing engineering knowledge lookup time by 60% through advanced LLM-powered semantic search.",
+      "Led the end-to-end architecture and delivery of an enterprise RAG-based AI chatbot (Angular, FastAPI, Azure) over 170,000+ technical documents, reducing engineering knowledge lookup time by 60% through advanced LLM-powered semantic search.",
      "Architected scalable LLM workflows using PostgreSQL + pgvector for vector similarity search with hybrid retrieval and strict metadata filtering (document/version/section-level constraints), improving retrieval precision by 35% and ensuring 100% citation-backed responses.",
      "Designed a high-performance ingestion and embedding pipeline for 100–400 page technical manuals (including code blocks and architecture diagrams), reducing hallucinations by 50% and achieving 90%+ answer accuracy on internal benchmarks.",
      "Optimized Azure-hosted inference, indexing, and caching strategies to cut end-to-end response latency by 45%, supporting high-concurrency enterprise usage with production-grade monitoring and evaluation metrics."
@@ -71,16 +74,19 @@ export const experience = [
     {
     id: 2,
     company: "Subscrbe AI",
+    summary:
+      "First engineer shaping architecture for a Flutter app on iOS and Android. Moved deep linking to native Universal and App Links and led RAG and agentic AI features.",
+    highlight: { value: "+50%", label: "deep-link reliability" },
     position: "Founding AI Engineer",
     duration: "Aug 2025 - Jan 2026",
     location: "San Francisco, CA",
     type: "Full-time",
     description:
-      "Leading AI integration and full-stack development of an application build using flutter for IOS and Android.",
+      "Leading AI integration and full-stack development of an application built with Flutter for iOS and Android.",
     achievements: [
       "Spearheaded core architectural decisions and developed mission-critical features from inception, shaping product direction and technical standards as a founding engineer, enabling the platform to scale efficiently to thousands of daily active users in a high-growth startup environment",
      "Led the migration from deprecated Firebase Dynamic Links to native Universal Links (iOS) and App Links (Android) using a custom domain, improving deep link reliability by up to 50%, reducing link failures, and enhancing cross-platform user engagement and retention.",
-     "Led intergration of AI features across the application, including RAG and agentic AI architectural decisions that enhanced the system reliability by 60%"
+     "Led integration of AI features across the application, including RAG and agentic AI architectural decisions that enhanced the system reliability by 60%"
     ],
     technologies: [
       "Agentic AI",
@@ -94,6 +100,9 @@ export const experience = [
   {
     id: 3,
     company: "WashMetrix",
+    summary:
+      "Built real-time React analytics for IoT laundry operations, Python and Node.js microservices, and automated ETL from POS systems into PostgreSQL. Took test coverage to 90%.",
+    highlight: { value: "+25%", label: "user engagement" },
     position: "Software Engineer",
     duration: "May 2024 - Jul 2025",
     location: "San Francisco, CA",
@@ -123,7 +132,10 @@ export const experience = [
   {
     id: 4,
     company: "Zemoso Technologies",
-    position: "Software Engineer 1",
+    summary:
+      "Shipped React and GraphQL features, CI/CD with Docker, and auto-scaling workloads on AWS EKS. Mentored three junior developers.",
+    highlight: { value: "−40%", label: "development cycle time" },
+    position: "Software Engineer I",
     duration: "Nov 2021 - Aug 2023",
     location: "Hyderabad, India",
     type: "Full-time",
@@ -157,7 +169,7 @@ export const projects = [
     id: 1,
     title: "CSUEB Student Support Chatbot",
     description:
-      "AI-powered chatbot designed to help California State University, East Bay students with university-related queries and academic support.",
+      "An AI assistant for Cal State East Bay students: university-specific answers, memory for follow-up questions, voice input and shareable chats.",
     longDescription:
       "An intelligent chatbot platform built specifically for CSUEB students to get instant answers to university-related questions. Features advanced conversation management with memory for follow-up questions, voice input capabilities, and convenient chat sharing options.",
     image: "/projects/chatbot.jpg",
@@ -177,13 +189,14 @@ export const projects = [
     ],
     githubUrl: "https://github.com/Sailokeshg/csueb-gemini-api",
     liveUrl: "https://csueb-support.netlify.app",
-    status: "Being Improved",
+    status: "In progress",
+    preview: "chat",
   },
   {
     id: 2,
     title: "LaTeX Résumé Tailor",
     description:
-      "Upload your LaTeX .tex résumé and get a tailored, keyword-optimized version with a live PDF preview in under 2 minutes.",
+      "Works directly on your .tex source: pick a model, set tone and length, and get a keyword-optimized résumé with a live PDF preview in about two minutes.",
     longDescription:
       "A LaTeX-first résumé tailoring tool that works directly with your .tex source to produce ATS-friendly, tailored résumés. Choose AI models to control length, tone and style; edit the generated LaTeX inline with a live side-by-side PDF preview, then export the final PDF or .tex file.",
     image: "/projects/latex-resume.jpg",
@@ -206,50 +219,46 @@ export const projects = [
     ],
     githubUrl: "https://github.com/Sailokeshg/resume-tailor-ai",
     liveUrl: "",
-    status: "Personal Project",
+    status: "Personal project",
+    preview: "latex",
   },
 ];
 
-export const skills = {
-  frontend: [
-    { name: "React", level: 90, category: "Frontend" },
-    { name: "TypeScript", level: 85, category: "Frontend" },
-    { name: "JavaScript", level: 95, category: "Frontend" },
-    { name: "HTML5/CSS3", level: 90, category: "Frontend" },
-    { name: "Tailwind CSS", level: 85, category: "Frontend" },
-    { name: "Next.js", level: 80, category: "Frontend" },
-    { name: "Vue.js", level: 70, category: "Frontend" },
-  ],
-  backend: [
-    { name: "Node.js", level: 90, category: "Backend" },
-    { name: "Python", level: 85, category: "Backend" },
-    { name: "Java", level: 80, category: "Backend" },
-    { name: "FastAPI", level: 85, category: "Backend" },
-    { name: "Express.js", level: 90, category: "Backend" },
-    { name: "Spring Boot", level: 75, category: "Backend" },
-    { name: "GraphQL", level: 70, category: "Backend" },
-  ],
-  database: [
-    { name: "PostgreSQL", level: 85, category: "Database" },
-     { name: "Pinecone", level: 85, category: "Database" },
-    { name: "MongoDB", level: 80, category: "Database" },
-    { name: "MySQL", level: 85, category: "Database" },
-    { name: "Redis", level: 75, category: "Database" },
-    { name: "DynamoDB", level: 70, category: "Database" },
-  ],
-  cloud: [
-    { name: "AWS", level: 80, category: "Cloud" },
-    { name: "Docker", level: 85, category: "Cloud" },
-    { name: "Kubernetes", level: 70, category: "Cloud" },
-    { name: "CI/CD", level: 80, category: "Cloud" },
-    { name: "Serverless", level: 75, category: "Cloud" },
-  ],
-  tools: [
-    { name: "Git", level: 95, category: "Tools" },
-    { name: "VS Code", level: 90, category: "Tools" },
-    { name: "Postman", level: 85, category: "Tools" },
-    { name: "Figma", level: 70, category: "Tools" },
-    { name: "Jira", level: 80, category: "Tools" },
+export const toolkit = [
+  {
+    label: "AI / LLM",
+    items: ["RAG", "Agentic AI", "Azure AI", "pgvector", "Pinecone", "Gemini", "OpenAI"],
+  },
+  {
+    label: "Backend",
+    items: ["Python", "FastAPI", "Node.js", "Express", "Java", "Spring Boot", "GraphQL"],
+  },
+  {
+    label: "Frontend",
+    items: ["React", "TypeScript", "Next.js", "Angular", "Flutter", "Tailwind CSS"],
+  },
+  {
+    label: "Data",
+    items: ["PostgreSQL", "MongoDB", "MySQL", "Redis", "DynamoDB", "Firestore"],
+  },
+  {
+    label: "Cloud",
+    items: ["AWS", "Azure", "Docker", "Kubernetes", "CI/CD", "Serverless"],
+  },
+  {
+    label: "Quality",
+    items: ["Jest", "Pytest", "Postman", "Git", "Jira", "Figma"],
+  },
+];
+
+// Headline numbers for the results band, from the Agadia RAG work.
+export const results = {
+  caption: "Enterprise RAG at Agadia Systems, 2026 — by the numbers",
+  items: [
+    { value: "170K+", label: "technical documents indexed" },
+    { value: "60%", label: "faster knowledge lookup" },
+    { value: "50%", label: "fewer hallucinations" },
+    { value: "100%", label: "citation-backed answers" },
   ],
 };
 

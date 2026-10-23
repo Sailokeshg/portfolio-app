@@ -1,172 +1,54 @@
 import React from "react";
-import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  Briefcase,
-  Download,
-  Github,
-  Linkedin,
-  Mail,
-  MapPin,
-} from "lucide-react";
 import { personalInfo } from "../data/portfolio";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.45, ease: "easeOut" },
-  },
-};
-
-const handleScroll = (sectionId) => {
-  const element = document.querySelector(sectionId);
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth" });
-  }
-};
-
-const metrics = [
-  { value: "40K+", label: "docs indexed for RAG" },
-  { value: "60%", label: "faster knowledge lookup" },
-  { value: "90%+", label: "answer accuracy benchmarks" },
+const elsewhere = [
+  { label: personalInfo.email, href: `mailto:${personalInfo.email}` },
+  { label: "LinkedIn", href: personalInfo.linkedin, external: true },
+  { label: "GitHub", href: personalInfo.github, external: true },
+  { label: "Résumé (PDF)", href: personalInfo.resumeUrl, external: true },
 ];
-
-const focusAreas = ["AI/RAG", "Full-stack", "Cloud", "Data pipelines"];
 
 const Hero = () => {
   return (
-    <section id="home" className="section-padding pt-14 sm:pt-24">
-      <div className="container-center">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          transition={{ staggerChildren: 0.08 }}
-          className="grid gap-10 border-b border-ink-900/10 pb-16 dark:border-white/10 lg:grid-cols-[1fr_340px]"
-        >
-          <div>
-            <motion.div variants={fadeUp} className="flex flex-wrap gap-2">
-              <span className="pill">Software Engineer</span>
-              <span className="pill">AI-focused full-stack developer</span>
-            </motion.div>
-            <motion.h1
-              variants={fadeUp}
-              className="mt-6 max-w-4xl text-balance text-5xl font-bold tracking-tight text-ink-950 dark:text-white sm:text-6xl"
-            >
-              I build practical AI and full-stack software for real product
-              workflows.
-            </motion.h1>
-            <motion.h2
-              variants={fadeUp}
-              className="mt-5 text-xl font-semibold text-ink-800 dark:text-ink-100"
-            >
-              {personalInfo.name} · {personalInfo.title}
-            </motion.h2>
-            <motion.p
-              variants={fadeUp}
-              className="mt-5 max-w-3xl text-lg leading-8 text-ink-600 dark:text-ink-300"
-            >
-              {personalInfo.summary}
-            </motion.p>
+    <section id="top" className="container-page pb-14 pt-[clamp(3rem,8vw,7rem)]">
+      <h1 className="font-serif text-[clamp(3.5rem,10.5vw,10.5rem)] font-normal leading-[0.92] tracking-[-0.02em]">
+        Engineering AI
+        <br />
+        <span className="italic text-cobalt">people can trust.</span>
+      </h1>
 
-            <motion.div variants={fadeUp} className="mt-6 flex flex-wrap gap-2">
-              {focusAreas.map((area) => (
-                <span key={area} className="pill">
-                  {area}
-                </span>
-              ))}
-            </motion.div>
-
-            <motion.div
-              variants={fadeUp}
-              className="mt-8 flex flex-col gap-3 sm:flex-row"
-            >
-              <button
-                onClick={() => handleScroll("#projects")}
-                className="btn-primary"
-              >
-                View Projects
-                <ArrowRight size={16} />
-              </button>
-              <a
-                href={personalInfo.resumeUrl}
-                download
-                className="btn-secondary"
-              >
-                <Download size={16} />
-                Resume
-              </a>
-              <button
-                onClick={() => handleScroll("#contact")}
-                className="btn-secondary"
-              >
-                Contact
-              </button>
-            </motion.div>
-
-            <motion.div
-              variants={fadeUp}
-              className="mt-10 grid gap-3 sm:grid-cols-3"
-            >
-              {metrics.map((metric) => (
-                <div key={metric.label} className="metric-card">
-                  <p className="text-2xl font-bold tracking-tight text-ink-950 dark:text-white">
-                    {metric.value}
-                  </p>
-                  <p className="mt-1 text-sm leading-5 text-ink-500 dark:text-ink-400">
-                    {metric.label}
-                  </p>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-
-          <motion.aside variants={fadeUp} className="card h-fit">
-            <div className="accent-line">
-              <p className="text-sm leading-6 text-ink-600 dark:text-ink-300">
-                Software engineer with AI, product, and cloud experience.
-              </p>
-            </div>
-            <div className="mt-5 space-y-3 border-t border-ink-900/10 pt-5 text-sm text-ink-600 dark:border-white/10 dark:text-ink-300">
-              <p className="flex items-center gap-2">
-                <Briefcase size={15} />
-                Full-stack · AI/RAG · Cloud
-              </p>
-              <p className="flex items-center gap-2">
-                <MapPin size={15} />
-                {personalInfo.location}
-              </p>
-            </div>
-            <div className="mt-4 space-y-3 text-sm text-ink-600 dark:text-ink-300">
-              <a
-                href={`mailto:${personalInfo.email}`}
-                className="flex items-center gap-2 hover:text-ink-950 dark:hover:text-white"
-              >
-                <Mail size={15} />
-                {personalInfo.email}
-              </a>
-              <a
-                href={personalInfo.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:text-ink-950 dark:hover:text-white"
-              >
-                <Linkedin size={15} />
-                LinkedIn
-              </a>
-              <a
-                href={personalInfo.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:text-ink-950 dark:hover:text-white"
-              >
-                <Github size={15} />
-                GitHub
-              </a>
-            </div>
-          </motion.aside>
-        </motion.div>
+      <div className="mt-[clamp(2.5rem,6vw,5rem)] grid gap-x-12 gap-y-8 border-t border-ink pt-7 md:grid-cols-3">
+        <div className="space-y-2.5">
+          <p className="eyebrow">About</p>
+          <p className="text-lg leading-relaxed">
+            Full-stack engineer focused on RAG, agentic workflows and the backend
+            systems that keep them accurate. Shipping software since 2021.
+          </p>
+        </div>
+        <div className="space-y-2.5">
+          <p className="eyebrow">Currently</p>
+          <p className="text-lg leading-relaxed">
+            {personalInfo.title} at <strong className="font-semibold">Agadia Systems</strong>{" "}
+            — leading RAG chatbots and AI agents for the engineering lifecycle.
+          </p>
+        </div>
+        <div className="space-y-2.5">
+          <p className="eyebrow">Elsewhere</p>
+          <ul className="flex flex-col text-lg leading-relaxed">
+            {elsewhere.map((link) => (
+              <li key={link.label}>
+                <a
+                  href={link.href}
+                  className="text-link"
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noopener noreferrer" : undefined}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
