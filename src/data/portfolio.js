@@ -200,11 +200,6 @@ export const aiWork = [
       { value: "Graph-checked", label: "Output validated against a knowledge graph we built" },
       { value: "3 docs", label: "Architecture (C4), Technical and Functional, per repository" },
     ],
-    proof: {
-      lead: "Run on our own production platform:",
-      emphasis: "156 frontend files, 90+ endpoints and 42 tables",
-      tail: "documented end to end.",
-    },
     technologies: ["Claude", "tree-sitter", "Roslyn", "Python ast", "knowledge graph", "Pydantic"],
     preview: "docs-pipeline",
   },
