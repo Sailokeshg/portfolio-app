@@ -4,6 +4,7 @@ import Hero from "./components/Hero";
 import Results from "./components/Results";
 import Experience from "./components/Experience";
 import AIWork from "./components/AIWork";
+import Research from "./components/Research";
 import Projects from "./components/Projects";
 import About from "./components/About";
 import Contact from "./components/Contact";
@@ -19,6 +20,7 @@ function App() {
         <Results />
         <Experience />
         <AIWork />
+        <Research />
         <Projects />
         <About />
         <Contact />

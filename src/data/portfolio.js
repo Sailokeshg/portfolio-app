@@ -200,11 +200,6 @@ export const aiWork = [
       { value: "Graph-checked", label: "Output validated against a knowledge graph we built" },
       { value: "3 docs", label: "Architecture (C4), Technical and Functional, per repository" },
     ],
-    proof: {
-      lead: "Run on our own production platform:",
-      emphasis: "156 frontend files, 90+ endpoints and 42 tables",
-      tail: "documented end to end.",
-    },
     technologies: ["Claude", "tree-sitter", "Roslyn", "Python ast", "knowledge graph", "Pydantic"],
     preview: "docs-pipeline",
   },
@@ -233,6 +228,56 @@ export const aiWork = [
     preview: "sdlc-chain",
   },
 ];
+
+// Applied research at CSU East Bay, framed around the software that was built.
+export const research = {
+  entries: [
+    {
+      id: "vr-trainer",
+      years: "2023–2024",
+      title: "VR patient-safety trainer",
+      role: "Original developer · Lead author",
+      description:
+        "Built a Unity app for Meta Quest 2 that puts nursing students inside 360° captures of CSU East Bay's simulation lab, shot on an Insta360 X2. Students search the room for 10 hidden safety hazards, with scoring, pop-up explanations and audio feedback for each find.",
+      stats: [
+        { value: "10", label: "hidden hazards to find" },
+        { value: "1st", label: "author, Springer CCIS" },
+        { value: "CSR", label: "Scholar, CSU East Bay" },
+      ],
+      paper: {
+        title: "Advancing Nursing Education Through Virtual Reality Training",
+        venue: "CSCE 2024, Las Vegas · Springer CCIS vol. 2260, 2025",
+        url: "https://doi.org/10.1007/978-3-031-85923-6_18",
+      },
+      talkUrl: "https://youtu.be/WoDhRUDPcMQ",
+      technologies: ["Unity", "C#", "Meta Quest 2", "360° capture"],
+    },
+    {
+      id: "vr-pilot",
+      years: "2025–2026",
+      title: "Standalone VR pilot with nursing students",
+      role: "Co-author · Handed over and mentored the codebase",
+      description:
+        "Handed my codebase to the next student team and helped them get it running standalone on the headset, now with 5 hazards, a 5-minute timer and an end-of-session summary. Rejoined to co-author the pilot study and wrote its conclusions on challenges and next steps.",
+      stats: [
+        { value: "14", label: "nursing students in the pilot" },
+        { value: "100%", label: "found at least 3 of 5 hazards" },
+        { value: "4.64/5", label: "want to use VR training more often" },
+      ],
+      paper: {
+        title: "Improving and Piloting the Application of 360° Virtual Reality Technology in Nursing Education",
+        venue: "CATA 2026, Honolulu · Springer CCIS, 2026",
+        url: "https://doi.org/10.1007/978-3-032-29003-8_7",
+      },
+      technologies: ["Unity", "Meta Quest 2 standalone", "User study"],
+    },
+  ],
+  review: {
+    years: "2026",
+    title: "Peer reviewer, JMIR Formative Research",
+    description: "Reviewing early-stage digital-health software studies.",
+  },
+};
 
 export const projects = [
   {
