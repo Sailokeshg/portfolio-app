@@ -1,6 +1,6 @@
 export const personalInfo = {
   name: "Sai Lokesh Reddy",
-  title: "Software Engineer AI",
+  title: "Software Engineer, AI",
   email: "sailokeshreddy@gmail.com",
   phone: "+1 (510) 255-0650",
   linkedin: "https://linkedin.com/in/sailokeshg",
@@ -43,44 +43,72 @@ export const education = [
 ];
 
 export const experience = [
-      {
+  {
     id: 1,
     company: "Agadia Systems",
-    position: "Software Engineer AI",
+    summary:
+      "Building the AI layer of Agadia's internal knowledge and SDLC platform: a RAG assistant over 170,000+ documents, agents that turn Jira change requests into requirements and test suites, and a pipeline that documents codebases on its own.",
+    highlight: { value: "5–10 min", label: "per FRD, down from hours" },
+    position: "Software Engineer, AI",
     duration: "Jan 2026 - Present",
     location: "New Jersey, NJ",
     type: "Full-time",
     description:
       "Leading AI integration to improve enterprise level software development lifecycle using RAG Chatbots and AI Agents.",
+    // Achievements may be plain strings or { title, text } for a bold lead-in.
     achievements: [
-      "Led the end-to-end architecture and delivery of an enterprise RAG-based AI chatbot (Angular, FastAPI, Azure) over 40,000+ technical documents, reducing engineering knowledge lookup time by 60% through advanced LLM-powered semantic search.",
-     "Architected scalable LLM workflows using PostgreSQL + pgvector for vector similarity search with hybrid retrieval and strict metadata filtering (document/version/section-level constraints), improving retrieval precision by 35% and ensuring 100% citation-backed responses.",
-     "Designed a high-performance ingestion and embedding pipeline for 100–400 page technical manuals (including code blocks and architecture diagrams), reducing hallucinations by 50% and achieving 90%+ answer accuracy on internal benchmarks.",
-     "Optimized Azure-hosted inference, indexing, and caching strategies to cut end-to-end response latency by 45%, supporting high-concurrency enterprise usage with production-grade monitoring and evaluation metrics."
+      {
+        title: "RAG assistant.",
+        text: "Led architecture and delivery of an enterprise RAG chatbot over 170,000+ technical documents, using pgvector hybrid retrieval, persona-aware answers for analysts and developers, SSE token streaming and 100% citation-backed responses. Knowledge lookup is 60% faster.",
+      },
+      {
+        title: "Requirements agent.",
+        text: "Built AI generation of Functional Requirements Documents from Jira change requests, pulling in attachments, meeting notes and context from up to five related products. Drafting time fell from hours to 5–10 minutes.",
+      },
+      {
+        title: "QA agents.",
+        text: "Generated test plans and test-case suites from FRDs, gated by a QA-architect validator agent that enforces 80% requirement coverage, then ran them automatically with Playwright and LangChain MCP agents.",
+      },
+      {
+        title: "Agentic editing.",
+        text: "Shipped document editing where the model proposes changes and people approve them, with SHA-256 content hashes blocking conflicting edits.",
+      },
+      {
+        title: "Code-to-docs pipeline.",
+        text: "Designed an LLM pipeline that turns a Git repository into Architecture, Technical and Functional documentation in a single pass from parser ASTs, validated against a knowledge graph we built.",
+      },
+      {
+        title: "Performance.",
+        text: "Tuned Azure-hosted inference, indexing and caching to cut response latency by 45% under high-concurrency use.",
+      },
     ],
     technologies: [
-      "RAG",
-      "Agentic AI",
-      "Azure AI",
+      "Claude",
+      "Azure OpenAI (GPT-4o)",
+      "LangChain",
+      "MCP",
+      "pgvector",
       "FastAPI",
       "Angular",
-      "Vector DB",
-      "ML Pipelines"
+      "Playwright",
     ],
   },
     {
     id: 2,
     company: "Subscrbe AI",
+    summary:
+      "First engineer shaping architecture for a Flutter app on iOS and Android. Moved deep linking to native Universal and App Links and led RAG and agentic AI features.",
+    highlight: { value: "+50%", label: "deep-link reliability" },
     position: "Founding AI Engineer",
     duration: "Aug 2025 - Jan 2026",
     location: "San Francisco, CA",
     type: "Full-time",
     description:
-      "Leading AI integration and full-stack development of an application build using flutter for IOS and Android.",
+      "Leading AI integration and full-stack development of an application built with Flutter for iOS and Android.",
     achievements: [
       "Spearheaded core architectural decisions and developed mission-critical features from inception, shaping product direction and technical standards as a founding engineer, enabling the platform to scale efficiently to thousands of daily active users in a high-growth startup environment",
      "Led the migration from deprecated Firebase Dynamic Links to native Universal Links (iOS) and App Links (Android) using a custom domain, improving deep link reliability by up to 50%, reducing link failures, and enhancing cross-platform user engagement and retention.",
-     "Led intergration of AI features across the application, including RAG and agentic AI architectural decisions that enhanced the system reliability by 60%"
+     "Led integration of AI features across the application, including RAG and agentic AI architectural decisions that enhanced the system reliability by 60%"
     ],
     technologies: [
       "Agentic AI",
@@ -94,6 +122,9 @@ export const experience = [
   {
     id: 3,
     company: "WashMetrix",
+    summary:
+      "Built real-time React analytics for IoT laundry operations, Python and Node.js microservices, and automated ETL from POS systems into PostgreSQL. Took test coverage to 90%.",
+    highlight: { value: "+25%", label: "user engagement" },
     position: "Software Engineer",
     duration: "May 2024 - Jul 2025",
     location: "San Francisco, CA",
@@ -123,7 +154,10 @@ export const experience = [
   {
     id: 4,
     company: "Zemoso Technologies",
-    position: "Software Engineer 1",
+    summary:
+      "Shipped React and GraphQL features, CI/CD with Docker, and auto-scaling workloads on AWS EKS. Mentored three junior developers.",
+    highlight: { value: "−40%", label: "development cycle time" },
+    position: "Software Engineer I",
     duration: "Nov 2021 - Aug 2023",
     location: "Hyderabad, India",
     type: "Full-time",
@@ -152,12 +186,60 @@ export const experience = [
   },
 ];
 
+// Professional AI case studies, shown between Experience and side projects.
+export const aiWork = [
+  {
+    id: "code-to-docs",
+    eyebrow: "Case A · Internal tooling",
+    title: "Code-to-Docs: documentation that writes itself",
+    description:
+      "Give it a Git repository and it returns Architecture, Technical and Functional documents ready for the wiki. Static parsers turn the code into AST JSON, the LLM writes each document in a single pass, and a knowledge graph we built of the system validates what it says.",
+    stats: [
+      { value: "4 parsers", label: "Angular, C#, Python and SQL, traced from UI to database" },
+      { value: "1 pass", label: "Each document generated straight from the AST JSON" },
+      { value: "Graph-checked", label: "Output validated against a knowledge graph we built" },
+      { value: "3 docs", label: "Architecture (C4), Technical and Functional, per repository" },
+    ],
+    proof: {
+      lead: "Run on our own production platform:",
+      emphasis: "156 frontend files, 90+ endpoints and 42 tables",
+      tail: "documented end to end.",
+    },
+    technologies: ["Claude", "tree-sitter", "Roslyn", "Python ast", "knowledge graph", "Pydantic"],
+    preview: "docs-pipeline",
+  },
+  {
+    id: "jira-to-tests",
+    eyebrow: "Case B · Internal SDLC platform",
+    title: "From Jira ticket to tested feature, with agents",
+    description:
+      "AI workflows that turn a Jira change request into a Functional Requirements Document, then a test plan, a validated test-case suite and an automated run, with people approving what the model proposes.",
+    stats: [
+      { value: "5–10 min", label: "To draft an FRD that used to take hours" },
+      { value: "≥ 80%", label: "Requirement coverage enforced by a validator agent" },
+      { value: "Human-approved", label: "Agent edits are proposals; content hashes block conflicts" },
+      { value: "Streaming", label: "SSE output and background jobs with live progress" },
+    ],
+    technologies: [
+      "Claude",
+      "Azure OpenAI (GPT-4o)",
+      "LangChain",
+      "MCP",
+      "Playwright",
+      "FastAPI",
+      "Angular",
+      "PostgreSQL",
+    ],
+    preview: "sdlc-chain",
+  },
+];
+
 export const projects = [
   {
     id: 1,
     title: "CSUEB Student Support Chatbot",
     description:
-      "AI-powered chatbot designed to help California State University, East Bay students with university-related queries and academic support.",
+      "An AI assistant for Cal State East Bay students: university-specific answers, memory for follow-up questions, voice input and shareable chats.",
     longDescription:
       "An intelligent chatbot platform built specifically for CSUEB students to get instant answers to university-related questions. Features advanced conversation management with memory for follow-up questions, voice input capabilities, and convenient chat sharing options.",
     image: "/projects/chatbot.jpg",
@@ -177,13 +259,14 @@ export const projects = [
     ],
     githubUrl: "https://github.com/Sailokeshg/csueb-gemini-api",
     liveUrl: "https://csueb-support.netlify.app",
-    status: "Being Improved",
+    status: "In progress",
+    preview: "chat",
   },
   {
     id: 2,
     title: "LaTeX Résumé Tailor",
     description:
-      "Upload your LaTeX .tex résumé and get a tailored, keyword-optimized version with a live PDF preview in under 2 minutes.",
+      "Works directly on your .tex source: pick a model, set tone and length, and get a keyword-optimized résumé with a live PDF preview in about two minutes.",
     longDescription:
       "A LaTeX-first résumé tailoring tool that works directly with your .tex source to produce ATS-friendly, tailored résumés. Choose AI models to control length, tone and style; edit the generated LaTeX inline with a live side-by-side PDF preview, then export the final PDF or .tex file.",
     image: "/projects/latex-resume.jpg",
@@ -206,50 +289,46 @@ export const projects = [
     ],
     githubUrl: "https://github.com/Sailokeshg/resume-tailor-ai",
     liveUrl: "",
-    status: "Personal Project",
+    status: "Personal project",
+    preview: "latex",
   },
 ];
 
-export const skills = {
-  frontend: [
-    { name: "React", level: 90, category: "Frontend" },
-    { name: "TypeScript", level: 85, category: "Frontend" },
-    { name: "JavaScript", level: 95, category: "Frontend" },
-    { name: "HTML5/CSS3", level: 90, category: "Frontend" },
-    { name: "Tailwind CSS", level: 85, category: "Frontend" },
-    { name: "Next.js", level: 80, category: "Frontend" },
-    { name: "Vue.js", level: 70, category: "Frontend" },
-  ],
-  backend: [
-    { name: "Node.js", level: 90, category: "Backend" },
-    { name: "Python", level: 85, category: "Backend" },
-    { name: "Java", level: 80, category: "Backend" },
-    { name: "FastAPI", level: 85, category: "Backend" },
-    { name: "Express.js", level: 90, category: "Backend" },
-    { name: "Spring Boot", level: 75, category: "Backend" },
-    { name: "GraphQL", level: 70, category: "Backend" },
-  ],
-  database: [
-    { name: "PostgreSQL", level: 85, category: "Database" },
-     { name: "Pinecone", level: 85, category: "Database" },
-    { name: "MongoDB", level: 80, category: "Database" },
-    { name: "MySQL", level: 85, category: "Database" },
-    { name: "Redis", level: 75, category: "Database" },
-    { name: "DynamoDB", level: 70, category: "Database" },
-  ],
-  cloud: [
-    { name: "AWS", level: 80, category: "Cloud" },
-    { name: "Docker", level: 85, category: "Cloud" },
-    { name: "Kubernetes", level: 70, category: "Cloud" },
-    { name: "CI/CD", level: 80, category: "Cloud" },
-    { name: "Serverless", level: 75, category: "Cloud" },
-  ],
-  tools: [
-    { name: "Git", level: 95, category: "Tools" },
-    { name: "VS Code", level: 90, category: "Tools" },
-    { name: "Postman", level: 85, category: "Tools" },
-    { name: "Figma", level: 70, category: "Tools" },
-    { name: "Jira", level: 80, category: "Tools" },
+export const toolkit = [
+  {
+    label: "AI / LLM",
+    items: ["RAG", "Agentic AI", "Azure AI", "pgvector", "Pinecone", "Gemini", "OpenAI"],
+  },
+  {
+    label: "Backend",
+    items: ["Python", "FastAPI", "Node.js", "Express", "Java", "Spring Boot", "GraphQL"],
+  },
+  {
+    label: "Frontend",
+    items: ["React", "TypeScript", "Next.js", "Angular", "Flutter", "Tailwind CSS"],
+  },
+  {
+    label: "Data",
+    items: ["PostgreSQL", "MongoDB", "MySQL", "Redis", "DynamoDB", "Firestore"],
+  },
+  {
+    label: "Cloud",
+    items: ["AWS", "Azure", "Docker", "Kubernetes", "CI/CD", "Serverless"],
+  },
+  {
+    label: "Quality",
+    items: ["Jest", "Pytest", "Postman", "Git", "Jira", "Figma"],
+  },
+];
+
+// Headline numbers for the results band, from the Agadia RAG work.
+export const results = {
+  caption: "Enterprise RAG at Agadia Systems, 2026: by the numbers",
+  items: [
+    { value: "170K+", label: "technical documents indexed" },
+    { value: "60%", label: "faster knowledge lookup" },
+    { value: "50%", label: "fewer hallucinations" },
+    { value: "100%", label: "citation-backed answers" },
   ],
 };
 
