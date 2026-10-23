@@ -5,6 +5,7 @@ import { personalInfo } from "../data/portfolio";
 const navigationItems = [
   { name: "Work", href: "#work" },
   { name: "AI work", href: "#ai-work" },
+  { name: "Research", href: "#research" },
   { name: "Projects", href: "#projects" },
   { name: "About", href: "#about" },
 ];
